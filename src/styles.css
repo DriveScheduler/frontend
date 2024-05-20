@@ -11,3 +11,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+/* General styles */
+.max-width {
+  @apply max-w-[1440px] mx-auto;
+}
+
+.section-p-m {
+  @apply xl:px-14 xl:pb-20 md:px-12 md:pb-12 px-4 pb-4
+}
+
+.padding {
+  @apply sm:px-16 px-8 sm:py-24 py-12;
+}
+
+.padding-x {
+  @apply sm:px-16 px-6;
+}
+
+.padding-y {
+  @apply py-4;
+}
+
+.flex-center {
+  @apply flex items-center justify-center;
+}
+
+.flex-between {
+  @apply flex justify-between items-center;
+}
+
+.button__light__purple {
+  @apply daisy-btn bg-secondary-purple hover:shadow-lg hover:opacity-90 text-[16px] hover:bg-primary-purple rounded-[15px] text-white font-light px-6
+}
+
+.button__primary__purple {
+  @apply daisy-btn bg-primary-purple hover:shadow-lg hover:opacity-90 text-[16px] hover:bg-secondary-purple rounded-[15px] text-white font-light px-6
+}
+

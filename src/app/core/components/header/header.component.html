@@ -1,1 +1,37 @@
-<p>header works!</p>
+<header class="w-full absolute z-10 border-primary-purple border-b">
+  <nav class="max-w-[1440px] mx-auto flex justify-between items-center sm:px-20 px-6 py-8">
+    <a routerLink="/" class="py-[10px]">
+      <img
+        src="assets/images/drive-scheduler-logo.svg"
+        alt="DriveScheduler Logo"
+        class="object-contain w-[167px] h-[31px]"
+      />
+    </a>
+    <section>
+      <div class="flex items-center md:gap-10 gap-4">
+        <div class="block hover:text-primary-purple hover:underline-offset-[15px] hover:underline relative">
+          <a routerLink="/calendar">
+            <span>Planning</span>
+          </a>
+        </div>
+        <div class="block hover:text-primary-purple hover:underline-offset-[15px] hover:underline relative">
+          <a routerLink="/">
+            <span>Suivi</span>
+          </a>
+        </div>
+        <div class="block hover:text-primary-purple hover:underline-offset-[15px] hover:underline relative">
+          <a routerLink="/">
+            <span>Compte</span>
+          </a>
+        </div>
+        <div class="block relative">
+          <a routerLink="/account">
+            <button class="button__light__purple">
+              Connexion
+            </button>
+          </a>
+        </div>
+      </div>
+    </section>
+  </nav>
+</header>

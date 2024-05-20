@@ -1,0 +1,7 @@
+.hero__title {
+  @apply 2xl:text-[58px] sm:text-[48px] text-[30px] font-extrabold xl:w-[95%] leading-none;
+}
+
+.hero__subtitle {
+  @apply text-[24px] text-black-100 font-light mt-10 xl:w-[70%];
+}
