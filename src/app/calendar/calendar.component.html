@@ -1,0 +1,76 @@
+<style>
+    .control-section{
+        margin-top: 100px;
+    }
+</style>
+
+<div class="control-section">
+<ejs-schedule #scheduleObj width='100%' cssClass='quick-info-template' height='600px' [selectedDate]="selectedDate" [eventSettings]="eventSettings">   
+    <!-- Header -->
+        <ng-template #quickInfoTemplatesHeader let-data>
+        <div class="quick-info-header">
+          <div class="quick-info-header-content" [ngStyle]="getHeaderStyles(data)">
+            <div class="quick-info-title">{{getHeaderTitle(data)}}</div>
+            <div class="duration-text">{{getHeaderDetails(data)}}</div>
+          </div>
+        </div>
+      </ng-template>
+      <!-- Content -->
+      <ng-template #quickInfoTemplatesContent let-data>
+        <ng-container [ngTemplateOutlet]="data.elementType == 'cell' ? cellContent : eventContent"
+        [ngTemplateOutletContext]="{data:data}"></ng-container>
+      </ng-template>
+      <ng-template #cellContent let-data="data">
+        <div class="quick-info-content">
+          <div class="e-cell-content">
+            <div class="quick-content-area">
+              <!-- <ejs-textbox #titleObj id="title" placeholder="Title"></ejs-textbox> -->
+            </div>
+            <div class="quick-content-area">
+              <!-- <ejs-dropdownlist id='eventType' #eventTypeObj [dataSource]='roomData' [fields]='roomFields'
+                placeholder='Choose Type' index="{{0}}" popupHeight="200px"></ejs-dropdownlist> -->
+            </div>
+            <div class="quick-content-area">
+              <!-- <ejs-textbox #notesObj id="notes" placeholder="Notes"></ejs-textbox> -->
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template #eventContent let-data="data">
+        <div class="quick-info-content">
+          <div class="event-content">
+            <div class="meeting-type-wrap">
+              <label>Subject</label>:
+              <span>{{data.Subject}}</span>
+            </div>
+            <div class="meeting-subject-wrap">
+              <label>Moniteur</label>:
+              <span>{{data.Moniteur}}</span>
+            </div>
+            <div class="notes-wrap">
+              <label>Véhicule</label>:
+              <span>{{data.Vehicule}}</span>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <!-- Footer -->
+      <ng-template #quickInfoTemplatesFooter let-data>
+        <ng-container [ngTemplateOutlet]="data.elementType == 'cell' ? cellFooter : eventFooter"
+        [ngTemplateOutletContext]="{data:data}"></ng-container>
+      </ng-template>
+      <ng-template #cellFooter let-data="data">
+        <div class="e-cell-footer">
+          <button ejs-button id="more-details" cssClass="e-flat">Reserver</button>
+          <button ejs-button id="add" cssClass="e-flat"
+            >Add</button>
+        </div>
+      </ng-template>
+      <ng-template #eventFooter let-data="data">
+        <div class="e-event-footer">
+          <button ejs-button id="delete">Delete</button>
+          <button ejs-button id="more-details" [isPrimary]="true" (click)="reserverCreneau()">Réserver </button>
+        </div>
+      </ng-template>
+</ejs-schedule>
+</div>
