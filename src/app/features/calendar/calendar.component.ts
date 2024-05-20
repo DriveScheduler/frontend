@@ -2,10 +2,10 @@ import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ScheduleComponent, MonthService, DayService, WeekService, WorkWeekService, AgendaService, MonthAgendaService, ResourcesModel, CellClickEventArgs, CurrentAction, EventSettingsModel, EJ2Instance, CallbackFunction, ScheduleModule, PopupOpenEventArgs } from '@syncfusion/ej2-angular-schedule';
 import { extend, Internationalization, closest, isNullOrUndefined } from '@syncfusion/ej2-base';
-import { scheduleData } from '../data';
+import { scheduleData } from '../../../assets/mock/data';
 import { CommonModule  } from '@angular/common';
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
-import { LessonService } from '../services/lesson.service';
+import { LessonService } from '../lessons/services/lesson.service';
 
 @Component({
   selector: 'app-calendar',
@@ -18,12 +18,12 @@ import { LessonService } from '../services/lesson.service';
 })
 export class CalendarComponent {
   @ViewChild('scheduleObj') public scheduleObj!: ScheduleComponent;
-  
+
   public selectedDate: Date = new Date(2024, 4, 5);
   public intl: Internationalization = new Internationalization();
 
   constructor(private lessonService: LessonService) {}
- 
+
   public eventSettings: EventSettingsModel = { dataSource: extend([], scheduleData, Object, true) as Record<string, any>[] };
 
   public getResourceData(data: Record<string, any>): Record<string, any> {

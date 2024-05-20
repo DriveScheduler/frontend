@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { CalendarComponent } from './calendar/calendar.component';
+import { CalendarComponent } from './features/calendar/calendar.component';
 
 
 @Component({
