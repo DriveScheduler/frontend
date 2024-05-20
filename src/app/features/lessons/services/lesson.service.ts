@@ -13,7 +13,7 @@ export class LessonService {
     return this.http.get(environment.creneaux);
   }
 
-  public addStudentToLesson(lessonId:number,studentId:number){
-    return this.http.post(environment.addStudentToLesson,{lessonId:lessonId,studentId:studentId});
+  public addStudentToLesson(lessonId:number,studentId:string){
+    return this.http.put(environment.addStudentToLesson,{lessonId:lessonId,studentId:studentId});
   }
 }
