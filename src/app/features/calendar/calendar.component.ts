@@ -1,11 +1,11 @@
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ScheduleComponent, MonthService, DayService, WeekService, WorkWeekService, AgendaService, MonthAgendaService, ResourcesModel, CellClickEventArgs, CurrentAction, EventSettingsModel, EJ2Instance, CallbackFunction, ScheduleModule, PopupOpenEventArgs } from '@syncfusion/ej2-angular-schedule';
-import { extend, Internationalization, closest, isNullOrUndefined } from '@syncfusion/ej2-base';
-import { scheduleData } from '../../../assets/mock/data';
+import { ScheduleComponent, MonthService, DayService, WeekService, WorkWeekService, AgendaService, MonthAgendaService, EventSettingsModel, ScheduleModule, ActionEventArgs } from '@syncfusion/ej2-angular-schedule';
+import { extend, Internationalization, closest } from '@syncfusion/ej2-base';
+import { scheduleData, monitorData } from '../../../assets/mock/data';
 import { CommonModule  } from '@angular/common';
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
 import { LessonService } from '../lessons/services/lesson.service';
+import { DropDownList } from '@syncfusion/ej2-angular-dropdowns';
 
 @Component({
   selector: 'app-calendar',
@@ -26,20 +26,8 @@ export class CalendarComponent {
 
   public eventSettings: EventSettingsModel = { dataSource: extend([], scheduleData, Object, true) as Record<string, any>[] };
 
-  public getResourceData(data: Record<string, any>): Record<string, any> {
-    const resources: ResourcesModel = this.scheduleObj.getResourceCollections()[0];
-    const resourceData: Record<string, any> = (resources.dataSource as Record<string, any>[]).filter((resource: Record<string, any>) =>
-      resource.Id === data.RoomId)[0] as Record<string, any>;
-    return resourceData;
-  }
-
   public getHeaderStyles(data: Record<string, any>): Record<string, any> {
-    // if (data.elementType === 'cell') {
-    //   return { 'align-items': 'center', color: '#919191' };
-    // } else {
-    //   const resourceData: Record<string, any> = this.getResourceData(data);
       return { background: '#475387', color: '#FFFFFF' };
-    // }
   }
 
   public getHeaderTitle(data: Record<string, any>): string {
@@ -61,8 +49,41 @@ export class CalendarComponent {
   });
   }
 
-  public reserverCreneau(): void {
-    this.lessonService.addStudentToLesson(1,1).subscribe((data) => {
+  public onActionBegin(args: ActionEventArgs): void {
+    if (args.requestType === 'toolbarItemRendering') {
+      if (args.items) {
+      args.items.push({ align: 'Right', template: '<input type="text" id="UserDropdown" />' });
+      }
+    }
+  }
+
+  public onActionComplete(args: ActionEventArgs): void {
+    if (args.requestType === 'toolBarItemRendered') {
+      let userDropdown: HTMLElement = document.getElementById('UserDropdown') as HTMLElement;
+
+      let userDropDownObj = new DropDownList({
+        dataSource: monitorData,
+        fields: { text: 'Name', value: 'Name' },
+        placeholder: 'Filtrer par moniteur',
+        width: '150px',
+        change: (e: any) => this.onMonitorChange(e.value)
+      });
+      userDropDownObj.appendTo(userDropdown);
+    }
+  }
+
+  public onMonitorChange(moniteur: string): void {
+    console.log(moniteur);
+    if (moniteur === 'All') {
+      this.scheduleObj.eventSettings.dataSource = this.eventSettings.dataSource;
+    } else {
+      this.scheduleObj.eventSettings.dataSource = (this.eventSettings.dataSource as any[]).filter(event => event.Moniteur === moniteur);
+    }
+    this.scheduleObj.refreshEvents();
+  }
+
+  public reserverCreneau(idLesson: number): void {
+    this.lessonService.addStudentToLesson(idLesson,"47C0B9DB-44AB-4EEA-9F73-0B76092AAA45").subscribe((data) => {
       console.log(data);
   });}
 }

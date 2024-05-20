@@ -1,6 +1,15 @@
 /**
  * Schedule datasource
  */
+export let monitorData:  Record<string, any>[] = [
+  { Id: '', Name: 'All'},
+  { Id: '1', Name : 'Jean Dupont' },
+  { Id: '2', Name: 'Marie Martin' },
+  { Id: '3', Name: 'Paul Durand' },
+  { Id: '4', Name: 'Jeanne Leblanc' },
+  { Id: '5', Name: 'Jacques Bernard' },
+  { Id: '6', Name: 'Sophie Dubois' }
+];
 
 export let scheduleData: Record<string, any>[] = [
   {
