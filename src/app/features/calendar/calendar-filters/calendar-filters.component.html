@@ -1,0 +1,72 @@
+<aside class="min-w-[15rem]">
+  <div tabindex="0" class="daisy-collapse daisy-collapse-arrow border border-primary-purple">
+    <input type="checkbox" checked />
+    <div class="daisy-collapse-title bg-white text-xl font-medium">
+      <div class="flex items-center gap-2">
+        <img src="assets/images/filter-solid.svg" class="object-contain w-[16px] h-[16px]">
+        <h1 class="font-bold">Filtres</h1>
+      </div>
+    </div>
+    <div class="daisy-collapse-content bg-white flex flex-col gap-4">
+      <div tabindex="0"  class="daisy-collapse daisy-collapse-arrow border border-primary-blue">
+        <input type="checkbox" />
+        <div class="daisy-collapse-title bg-white text-l">
+          <h1 class="font-semibold">Moniteurs</h1>
+        </div>
+        <div class="daisy-collapse-content bg-white flex flex-col gap-4">
+          <div class="flex flex-col gap-2">
+            <!-- TODO: remplacer par une boucle for qui va chercher dans un service la liste des moniteurs -->
+            <div class="flex justify-between items-center">
+              <span class="text-sm">Dominique</span>
+              <input type="checkbox" checked class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-sm">Bernard</span>
+              <input type="checkbox" checked class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div tabindex="0"  class="daisy-collapse daisy-collapse-arrow border border-primary-blue">
+        <input type="checkbox" />
+        <div class="daisy-collapse-title bg-white text-l font-regular">
+          <h1 class="">Type de permis</h1>
+        </div>
+        <div class="daisy-collapse-content bg-white flex flex-col gap-4">
+          <div class="flex justify-between items-center">
+            <span class="text-sm">A2 - Moto</span>
+            <input type="checkbox" checked class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-sm">B - Voiture</span>
+            <input type="checkbox" checked class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-sm">C - Bus</span>
+            <input type="checkbox" checked class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-sm">D - Poids Lourd</span>
+            <input type="checkbox" checked class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
+          </div>
+        </div>
+      </div>
+      <div tabindex="0"  class="daisy-collapse daisy-collapse-arrow border border-primary-blue">
+        <input type="checkbox" />
+        <div class="daisy-collapse-title bg-white text-l font-regular">
+          <h1 class="">Statut du créneau</h1>
+        </div>
+        <div class="daisy-collapse-content bg-white flex flex-col gap-4">
+          <div class="flex justify-between items-center">
+            <span class="text-sm">Disponible</span>
+            <input type="checkbox" checked class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-sm">Complet</span>
+            <input type="checkbox" checked class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>

@@ -6,11 +6,12 @@ import { CommonModule  } from '@angular/common';
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
 import { LessonService } from '../lessons/services/lesson.service';
 import { DropDownList } from '@syncfusion/ej2-angular-dropdowns';
+import {CalendarFiltersComponent} from "./calendar-filters/calendar-filters.component";
 
 @Component({
   selector: 'app-calendar',
   standalone: true,
-  imports: [ScheduleModule,  CommonModule, ButtonModule],
+  imports: [ScheduleModule, CommonModule, ButtonModule, CalendarFiltersComponent],
   providers: [DayService, WeekService, WorkWeekService, MonthService, AgendaService, MonthAgendaService],
   encapsulation: ViewEncapsulation.None,
   templateUrl: './calendar.component.html',
