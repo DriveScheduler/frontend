@@ -4,7 +4,7 @@
     <div class="col-span-1">
       <app-calendar-filters></app-calendar-filters>
     </div>
-    <ejs-schedule class="col-span-4 rounded-xl border border-primary-purple" #scheduleObj width='100%' cssClass='quick-info-template' height='600px' [selectedDate]="selectedDate" [eventSettings]="eventSettings" (actionBegin)="onActionBegin($event)" (actionComplete)="onActionComplete($event)">
+    <ejs-schedule class="col-span-4 rounded-xl border border-primary-purple" #scheduleObj width='100%' cssClass='quick-info-template' height='600px' [selectedDate]="selectedDate" [eventSettings]="eventSettings" (actionComplete)="onActionComplete($event)">
         <!-- Header -->
 
             <ng-template #quickInfoTemplatesHeader let-data>
@@ -37,15 +37,15 @@
               <div class="event-content">
                 <div class="meeting-type-wrap">
                   <label>Subject</label>:
-                  <span>{{data.Subject}}</span>
+                  <span>{{data.title}}</span>
                 </div>
                 <div class="meeting-subject-wrap">
                   <label>Moniteur</label>:
-                  <span>{{data.Moniteur}}</span>
+                  <span>{{data.teacher}}</span>
                 </div>
                 <div class="notes-wrap">
                   <label>Véhicule</label>:
-                  <span>{{data.Vehicule}}</span>
+                  <span>{{data.vehicle}}</span>
                 </div>
               </div>
             </div>
@@ -64,8 +64,8 @@
           </ng-template>
           <ng-template #eventFooter let-data="data">
             <div class="e-event-footer">
-              <button ejs-button id="delete">Delete</button>
-              <button ejs-button id="more-details" [isPrimary]="true" (click)="reserverCreneau(data.Id)">Réserver </button>
+              <button ejs-button id="queue" (click)="fileDattente(data.id)">File d'attente</button>
+              <button ejs-button id="more-details" [isPrimary]="true" (click)="reserverCreneau(data.id)">Réserver </button>
             </div>
           </ng-template>
     </ejs-schedule>

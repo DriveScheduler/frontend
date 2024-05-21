@@ -1,12 +1,11 @@
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ScheduleComponent, MonthService, DayService, WeekService, WorkWeekService, AgendaService, MonthAgendaService, EventSettingsModel, ScheduleModule, ActionEventArgs } from '@syncfusion/ej2-angular-schedule';
 import { extend, Internationalization, closest } from '@syncfusion/ej2-base';
-import { scheduleData, monitorData } from '../../../assets/mock/data';
 import { CommonModule  } from '@angular/common';
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
 import { LessonService } from '../lessons/services/lesson.service';
-import { DropDownList } from '@syncfusion/ej2-angular-dropdowns';
 import {CalendarFiltersComponent} from "./calendar-filters/calendar-filters.component";
+import { userId } from '../../../assets/mock/data';
 
 @Component({
   selector: 'app-calendar',
@@ -25,20 +24,26 @@ export class CalendarComponent {
 
   constructor(private lessonService: LessonService) {}
 
-  public eventSettings: EventSettingsModel = { dataSource: extend([], scheduleData, Object, true) as Record<string, any>[] };
+  public eventSettings: EventSettingsModel = {
+    fields: {
+      subject: { title: 'Event Name', name: 'title'},
+      startTime: { title: 'From', name: 'startTime' },
+      endTime: { title: 'To', name: 'endTime' }
+    }
+   };
 
   public getHeaderStyles(data: Record<string, any>): Record<string, any> {
       return { background: '#475387', color: '#FFFFFF' };
   }
 
   public getHeaderTitle(data: Record<string, any>): string {
-    return (data.elementType === 'cell') ? 'Ajouter une leçon' : 'Détails - ' + data.Subject;
+    return (data.elementType === 'cell') ? 'Ajouter une leçon' : 'Détails - ' + data.title;
   }
 
   public getHeaderDetails(data: { [key: string]: Date }): string {
-    return this.intl.formatDate(data.StartTime, { type: 'date', skeleton: 'full' }) + ' (' +
-      this.intl.formatDate(data.StartTime, { skeleton: 'hm' }) + ' - ' +
-      this.intl.formatDate(data.EndTime, { skeleton: 'hm' }) + ')';
+    return this.intl.formatDate(data.startTime, { type: 'date', skeleton: 'full' }) + ' (' +
+      this.intl.formatDate(data.startTime, { skeleton: 'hm' }) + ' - ' +
+      this.intl.formatDate(data.endTime, { skeleton: 'hm' }) + ')';
   }
 
   public buttonClickActions(e: Event): void {
@@ -50,31 +55,33 @@ export class CalendarComponent {
   });
   }
 
-  public onActionBegin(args: ActionEventArgs): void {
-    if (args.requestType === 'toolbarItemRendering') {
-      if (args.items) {
-      args.items.push({ align: 'Right', template: '<input type="text" id="UserDropdown" />' });
-      }
+  public async onActionComplete(args: ActionEventArgs): Promise<void> {
+    if ( args.requestType === "viewNavigate" || args.requestType === "dateNavigate") { 
+      var currentViewDates = this.scheduleObj.getCurrentViewDates(); 
+      var startDate = currentViewDates[0]; 
+      var endDate = currentViewDates[currentViewDates.length-1];
+      console.log(startDate);
+      console.log(endDate);
+      const data = await this.getLessons(userId, startDate, endDate, false);
+        this.eventSettings.dataSource = data as any[];
+        this.scheduleObj.deleteEvent(this.scheduleObj.eventsData as { [key: string]: Object }[]);
+        this.scheduleObj.addEvent(data as any[]);
+        console.log(this.eventSettings.dataSource);
     }
   }
 
-  public onActionComplete(args: ActionEventArgs): void {
-    if (args.requestType === 'toolBarItemRendered') {
-      let userDropdown: HTMLElement = document.getElementById('UserDropdown') as HTMLElement;
-
-      let userDropDownObj = new DropDownList({
-        dataSource: monitorData,
-        fields: { text: 'Name', value: 'Name' },
-        placeholder: 'Filtrer par moniteur',
-        width: '150px',
-        change: (e: any) => this.onMonitorChange(e.value)
+private async getLessons(id: string, startDate: Date, endDate: Date, flag: boolean): Promise<any[]> {
+  return new Promise<any[]>((resolve, reject) => {
+      this.lessonService.getLessons(id, startDate, endDate, flag).subscribe((data) => {
+          console.log("on lance la requete");
+          resolve(data as any[]);
+      }, (error) => {
+          reject(error);
       });
-      userDropDownObj.appendTo(userDropdown);
-    }
-  }
+  });
+}
 
   public onMonitorChange(moniteur: string): void {
-    console.log(moniteur);
     if (moniteur === 'All') {
       this.scheduleObj.eventSettings.dataSource = this.eventSettings.dataSource;
     } else {
@@ -84,7 +91,11 @@ export class CalendarComponent {
   }
 
   public reserverCreneau(idLesson: number): void {
-    this.lessonService.addStudentToLesson(idLesson,"47C0B9DB-44AB-4EEA-9F73-0B76092AAA45").subscribe((data) => {
-      console.log(data);
+    this.lessonService.addStudentToLesson(idLesson,userId).subscribe((data) => {
   });}
+
+  public fileDattente(idLesson: number): void {
+    this.lessonService.addStudentToWaitingList(idLesson,userId).subscribe((data) => {
+  })}
+
 }
