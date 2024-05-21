@@ -1,10 +1,1 @@
-<svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_150_151)">
-<path d="M0.88356 3.43125C1.29606 2.55625 2.17106 2 3.13981 2H30.1398C31.1086 2 31.9836 2.55625 32.3961 3.43125C32.8086 4.30625 32.6836 5.3375 32.0711 6.0875L20.6398 20.0562V28C20.6398 28.7562 20.2148 29.45 19.5336 29.7875C18.8523 30.125 18.0461 30.0562 17.4398 29.6L13.4398 26.6C12.9336 26.225 12.6398 25.6312 12.6398 25V20.0562L1.20231 6.08125C0.59606 5.3375 0.46481 4.3 0.88356 3.43125Z" fill="black"/>
-</g>
-<defs>
-<clipPath id="clip0_150_151">
-<rect width="32" height="32" fill="white" transform="translate(0.639893)"/>
-</clipPath>
-</defs>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com Licence - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#000000" d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>
