@@ -41,11 +41,13 @@
                       }"
                 required>
           <option value="" disabled>Type de permis souhaité</option>
-          <!-- <option> à récupérer dans le backend -->
-        </select>
-      </div>
-      <button class="button__primary__purple">S'inscrire</button>
-      <p class="text-[12px] font-bold">Déjà membre ? <a routerLink="/signin"><span class="text-secondary-purple">Connecte toi.</span></a></p>
-    </form>
-  </div>
-</section>
+          @for (licence of (licences$ | async); track licence.name) {
+            <option>{{licence.name}}</option>
+          }
+          </select>
+        </div>
+        <button class="button__primary__purple">S'inscrire</button>
+        <p class="text-[12px] font-bold">Déjà membre ? <a routerLink="/signin"><span class="text-secondary-purple">Connecte toi.</span></a></p>
+      </form>
+    </div>
+  </section>
