@@ -23,6 +23,6 @@ export class LessonService {
   }
 
   public removeStudentFromLesson(lessonId:number,studentId:string){
-    return this.http.put(`${environment.api}/removeStudent`,{lessonId:lessonId,studentId:studentId});
+    return this.http.put(`${environment.api}/removeStudentFromLesson`,{lessonId:lessonId,studentId:studentId});
   }
 }
