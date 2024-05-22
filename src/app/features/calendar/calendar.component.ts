@@ -63,10 +63,10 @@ export class CalendarComponent {
       console.log(startDate);
       console.log(endDate);
       const data = await this.getLessons(userId, startDate, endDate, false);
-        this.eventSettings.dataSource = data as any[];
-        this.scheduleObj.deleteEvent(this.scheduleObj.eventsData as { [key: string]: Object }[]);
-        this.scheduleObj.addEvent(data as any[]);
-        console.log(this.eventSettings.dataSource);
+      this.eventSettings.dataSource = data as any[];
+      this.scheduleObj.deleteEvent(this.scheduleObj.eventsData as { [key: string]: any}[]);
+      this.scheduleObj.addEvent(data as any[]);
+      console.log(this.eventSettings.dataSource);
     }
   }
 
@@ -98,4 +98,11 @@ private async getLessons(id: string, startDate: Date, endDate: Date, flag: boole
     this.lessonService.addStudentToWaitingList(idLesson,userId).subscribe((data) => {
   })}
 
+  public quitterFileAttente(idLesson: number): void {
+    //this.lessonService.removeStudentFromLesson(idLesson,userId).subscribe((data) => {
+  };
+
+  public async annulerReservation(idLesson: number){
+    this.lessonService.removeStudentFromLesson(idLesson,userId).subscribe();
+  }
 }
