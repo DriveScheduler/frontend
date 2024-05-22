@@ -3,7 +3,7 @@ import { ScheduleComponent, MonthService, DayService, WeekService, WorkWeekServi
 import { extend, Internationalization, closest } from '@syncfusion/ej2-base';
 import { CommonModule  } from '@angular/common';
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
-import { LessonService } from '../lessons/services/lesson.service';
+import { LessonService } from '../../shared/services/lessons/services/lesson.service';
 import {CalendarFiltersComponent} from "./calendar-filters/calendar-filters.component";
 import { userId } from '../../../assets/mock/data';
 
@@ -56,9 +56,9 @@ export class CalendarComponent {
   }
 
   public async onActionComplete(args: ActionEventArgs): Promise<void> {
-    if ( args.requestType === "viewNavigate" || args.requestType === "dateNavigate") { 
-      var currentViewDates = this.scheduleObj.getCurrentViewDates(); 
-      var startDate = currentViewDates[0]; 
+    if ( args.requestType === "viewNavigate" || args.requestType === "dateNavigate") {
+      var currentViewDates = this.scheduleObj.getCurrentViewDates();
+      var startDate = currentViewDates[0];
       var endDate = currentViewDates[currentViewDates.length-1];
       console.log(startDate);
       console.log(endDate);
