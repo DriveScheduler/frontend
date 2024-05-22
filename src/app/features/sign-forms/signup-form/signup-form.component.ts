@@ -6,6 +6,8 @@ import { CommonModule } from "@angular/common";
 import {LicenceService} from "../../../shared/services/licence/licence.service";
 import {Licence} from "../../../shared/models/licence";
 import {Observable} from "rxjs";
+import {DrivingSchoolService} from "../../../shared/services/driving_school/driving-school.service";
+import {DrivingSchool} from "../../../shared/models/driving-school";
 
 @Component({
   selector: 'app-signup-form',
@@ -24,11 +26,13 @@ export class SignupFormComponent implements OnInit {
   isParticulier: boolean = true;
   isMoniteur: boolean = false;
   licences$!: Observable<Licence[]>;
+  drivingSchools$! : Observable<DrivingSchool[]>;
 
-  constructor(private licenceService: LicenceService) {}
+  constructor(private licenceService: LicenceService, private drivingSchoolService: DrivingSchoolService) {}
 
   ngOnInit() {
     this.getLicences();
+    this.getDrivingSchools();
   }
 
   signupForm = new FormGroup({
@@ -61,5 +65,9 @@ export class SignupFormComponent implements OnInit {
 
   private getLicences() {
     this.licences$ = this.licenceService.getLicences();
+  }
+
+  private getDrivingSchools() {
+    this.drivingSchools$ = this.drivingSchoolService.getDrivingSchools();
   }
 }

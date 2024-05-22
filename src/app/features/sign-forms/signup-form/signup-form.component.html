@@ -31,7 +31,9 @@
                       }"
                 required>
           <option value="" disabled>Auto-école</option>
-          <!-- <option> à récupérer dans le backend -->
+          @for (drivingSchool of (drivingSchools$ | async); track drivingSchool.name) {
+            <option>{{drivingSchool.name}}</option>
+          }
         </select>
         <app-custom-input class="grid col-span-2" [control]="signupInfo.password" placeholder="Mot de passe" inputIcon="key-solid" inputType="password"></app-custom-input>
         <app-custom-input class="grid col-span-2" [control]="signupInfo.passwordConfirmation" placeholder="Confirmer le mot de passe" inputIcon="key-solid" inputType="password"></app-custom-input>
