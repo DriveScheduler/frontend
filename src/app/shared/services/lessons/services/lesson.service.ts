@@ -19,7 +19,7 @@ export class LessonService {
   }
 
   public addStudentToWaitingList(lessonId:number,studentId:string){
-    return this.http.put(`${environment.api}/Lesson/AddStudentToWaitingList}`,{lessonId:lessonId,studentId:studentId});
+    return this.http.put(`${environment.api}/Lesson/AddStudentToWaitingList`,{lessonId:lessonId,studentId:studentId});
   }
 
   public removeStudentFromLesson(lessonId:number,studentId:string){
