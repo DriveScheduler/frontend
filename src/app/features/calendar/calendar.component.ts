@@ -56,19 +56,27 @@ export class CalendarComponent {
   }
 
   public async onActionComplete(args: ActionEventArgs): Promise<void> {
-    if ( args.requestType === "viewNavigate" || args.requestType === "dateNavigate") {
-      var currentViewDates = this.scheduleObj.getCurrentViewDates();
-      var startDate = currentViewDates[0];
-      var endDate = currentViewDates[currentViewDates.length-1];
-      console.log(startDate);
-      console.log(endDate);
-      const data = await this.getLessons(userId, startDate, endDate, false);
-      this.eventSettings.dataSource = data as any[];
-      this.scheduleObj.deleteEvent(this.scheduleObj.eventsData as { [key: string]: any}[]);
-      this.scheduleObj.addEvent(data as any[]);
-      console.log(this.eventSettings.dataSource);
+    if (args.requestType === "viewNavigate" || args.requestType === "dateNavigate") {
+        const currentViewDates = this.scheduleObj.getCurrentViewDates();
+        const startDate = currentViewDates[0];
+        const endDate = currentViewDates[currentViewDates.length - 1];
+
+        console.log(startDate);
+        console.log(endDate);
+
+        const data = await this.getLessons(userId, startDate, endDate, false);
+
+        // Clear existing events
+        this.scheduleObj.eventSettings.dataSource = [];
+        this.scheduleObj.refreshEvents();
+
+        // Add new events
+        this.scheduleObj.eventSettings.dataSource = data as any[];
+        this.scheduleObj.refreshEvents();
+
+        console.log(this.eventSettings.dataSource);
     }
-  }
+}
 
 private async getLessons(id: string, startDate: Date, endDate: Date, flag: boolean): Promise<any[]> {
   return new Promise<any[]>((resolve, reject) => {
