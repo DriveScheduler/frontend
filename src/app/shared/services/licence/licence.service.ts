@@ -11,7 +11,7 @@ export class LicenceService {
 
   constructor(private http:HttpClient) {}
 
-  getLicence() : Observable<Licence[]> {
+  getLicences() : Observable<Licence[]> {
     return  this.http.get<Licence[]>(`${environment.api}/Licence`)
   }
 }

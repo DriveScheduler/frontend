@@ -60,6 +60,6 @@ export class SignupFormComponent implements OnInit {
   }
 
   private getLicences() {
-    this.licences$ = this.licenceService.getLicence();
+    this.licences$ = this.licenceService.getLicences();
   }
 }

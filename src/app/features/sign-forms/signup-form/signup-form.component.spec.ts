@@ -38,13 +38,13 @@ describe('SignupFormComponent', () => {
 
   it('should fetch licence types from backend', () => {
     const mockLicences: Licence[] = [
-      { id: 0, name: 'B - Voiture' },
-      { id: 1, name: 'C - Poids lourd' },
-      { id: 2, name: 'A2 - Moto' },
-      { id: 3, name: 'D - Bus' }
+      { id: 0, label: 'B - Voiture' },
+      { id: 1, label: 'C - Poids lourd' },
+      { id: 2, label: 'A2 - Moto' },
+      { id: 3, label: 'D - Bus' }
     ];
 
-    spyOn(licenceService, 'getLicence').and.returnValue(of(mockLicences));
+    spyOn(licenceService, 'getLicences').and.returnValue(of(mockLicences));
 
     fixture.detectChanges();
 

@@ -15,15 +15,12 @@
         </div>
         <div class="daisy-collapse-content bg-white flex flex-col gap-4">
           <div class="flex flex-col gap-2">
-            <!-- TODO: remplacer par une boucle for qui va chercher dans un service la liste des moniteurs -->
-            <div class="flex justify-between items-center">
-              <span class="text-sm">Dominique</span>
-              <input type="checkbox" checked class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
-            </div>
-            <div class="flex justify-between items-center">
-              <span class="text-sm">Bernard</span>
-              <input type="checkbox" checked class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
-            </div>
+            @for (teacher of (teachers$ | async); track teacher.email) {
+              <div class="flex justify-between items-center">
+                <span class="text-sm">{{ teacher.firstName }} {{ teacher.name }}</span>
+                <input type="checkbox" checked class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
+              </div>
+            }
           </div>
         </div>
       </div>
@@ -33,23 +30,13 @@
           <h1 class="font-semibold">Type de permis</h1>
         </div>
         <div class="daisy-collapse-content bg-white flex flex-col gap-4">
-          <!-- TODO: remplacer par une boucle for  qui va chercher la liste des type de permis -->
-          <div class="flex justify-between items-center">
-            <span class="text-sm">A2 - Moto</span>
-            <input type="checkbox" checked class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="text-sm">B - Voiture</span>
-            <input type="checkbox" checked class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="text-sm">C - Bus</span>
-            <input type="checkbox" checked class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="text-sm">D - Poids Lourd</span>
-            <input type="checkbox" checked class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
-          </div>
+          @for (licence of (licences$ | async); track licence.label) {
+            <div class="flex justify-between items-center">
+              <span class="text-sm">{{ licence.label }}</span>
+              <input type="checkbox" checked class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
+            </div>
+
+          }
         </div>
       </div>
       <div tabindex="0"  class="daisy-collapse daisy-collapse-arrow border border-primary-blue">
