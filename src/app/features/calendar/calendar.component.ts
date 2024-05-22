@@ -78,16 +78,16 @@ export class CalendarComponent {
     }
 }
 
-private async getLessons(id: string, startDate: Date, endDate: Date, flag: boolean): Promise<any[]> {
-  return new Promise<any[]>((resolve, reject) => {
-      this.lessonService.getLessons(id, startDate, endDate, flag).subscribe((data) => {
-          console.log("on lance la requete");
-          resolve(data as any[]);
-      }, (error) => {
-          reject(error);
-      });
-  });
-}
+  private async getLessons(id: string, startDate: Date, endDate: Date, flag: boolean): Promise<any[]> {
+    return new Promise<any[]>((resolve, reject) => {
+        this.lessonService.getLessons(id, startDate, endDate, flag).subscribe((data) => {
+            console.log("on lance la requete");
+            resolve(data as any[]);
+        }, (error) => {
+            reject(error);
+        });
+    });
+  }
 
   public onMonitorChange(moniteur: string): void {
     if (moniteur === 'All') {
