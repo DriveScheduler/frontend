@@ -41,8 +41,8 @@
                       }"
                 required>
           <option value="" disabled>Type de permis souhaité</option>
-          @for (licence of (licences$ | async); track licence.name) {
-            <option>{{licence.name}}</option>
+          @for (licence of (licences$ | async); track licence.label) {
+            <option>{{licence.label}}</option>
           }
           </select>
         </div>
