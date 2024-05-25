@@ -6,25 +6,28 @@
     </div>
     <form class="flex flex-col gap-5 items-center" [formGroup]="signupForm" (ngSubmit)="onSubmitSignup()">
       <h1 class="text-2xl font-regular uppercase text-primary-purple">Inscription</h1>
-      <div class="flex items-center gap-5">
-        <p class="text-[12px] font-bold">Es-tu un : </p>
-        <div class="flex items-center gap-4">
-          <div class="flex items-center gap-1">
-            <input type="checkbox" class="daisy-checkbox daisy-checkbox-primary [--chkfg:white] rounded-full"
-                   [checked]="isParticulier" (change)="onCheckboxChange('particulier')"/>
-            <p class="text-[12px] font-bold">Particulier</p>
-          </div>
-          <div class="flex items-center gap-1">
-            <input type="checkbox" class="daisy-checkbox daisy-checkbox-primary [--chkfg:white] rounded-full"
-                   [checked]="isMoniteur" (change)="onCheckboxChange('moniteur')"/>
-            <p class="text-[12px] font-bold">Moniteur</p>
-          </div>
-        </div>
+      <div class="flex gap-4">
+        <label class="flex items-center gap-1">
+          <input type="radio" formControlName="type" [value]="0" class="daisy-radio daisy-radio-primary [--chkfg:white] rounded-full"
+                 [ngClass]="{
+                      'border-rose-500': signupForm.controls.type.invalid && signupForm.controls.type.dirty
+                 }"
+          />
+          <span class="text-[12px] font-bold">Particulier</span>
+        </label>
+        <label class="flex items-center gap-1">
+          <input type="radio" formControlName="type" [value]="1" class="daisy-radio daisy-radio-primary [--chkfg:white] rounded-full"
+                 [ngClass]="{
+                      'border-rose-500': signupForm.controls.type.invalid && signupForm.controls.type.dirty
+                 }"
+          />
+          <span class="text-[12px] font-bold">Moniteur</span>
+        </label>
       </div>
       <div class="grid grid-cols-2 gap-2">
-        <app-custom-input class="grid sm:col-span-1 col-span-2" [control]="signupInfo.firstName" placeholder="Prénom" inputIcon="user-solid"></app-custom-input>
-        <app-custom-input class="grid sm:col-span-1 col-span-2" [control]="signupInfo.lastName" placeholder="Nom" inputIcon="user-solid"></app-custom-input>
-        <app-custom-input class="grid col-span-2" [control]="signupInfo.email" placeholder="Email" inputIcon="envelope-solid"></app-custom-input>
+        <app-custom-input class="grid sm:col-span-1 col-span-2" [control]="signupForm.controls.firstName" placeholder="Prénom" inputIcon="user-solid"></app-custom-input>
+        <app-custom-input class="grid sm:col-span-1 col-span-2" [control]="signupForm.controls.name" placeholder="Nom" inputIcon="user-solid"></app-custom-input>
+        <app-custom-input class="grid col-span-2" [control]="signupForm.controls.email" placeholder="Email" inputIcon="envelope-solid"></app-custom-input>
         <select class="duration-300 hover:shadow-md focus:box__shadow daisy-select text-[16px] rounded-[20px] bg-gray-100 placeholder-opacity-60 focus:border-primary-purple focus:outline-none col-span-2 custom-select" formControlName="drivingSchool"
                 [ngClass]="{
                       'border-rose-500': signupForm.controls.drivingSchool.invalid && signupForm.controls.drivingSchool.dirty
@@ -35,21 +38,21 @@
             <option>{{drivingSchool.name}}</option>
           }
         </select>
-        <app-custom-input class="grid col-span-2" [control]="signupInfo.password" placeholder="Mot de passe" inputIcon="key-solid" inputType="password"></app-custom-input>
-        <app-custom-input class="grid col-span-2" [control]="signupInfo.passwordConfirmation" placeholder="Confirmer le mot de passe" inputIcon="key-solid" inputType="password"></app-custom-input>
-        <select class="duration-300 hover:shadow-md focus:box__shadow daisy-select text-[16px] rounded-[20px] bg-gray-100 placeholder-opacity-60 focus:border-primary-purple focus:outline-none col-span-2 custom-select" formControlName="licenseType"
+        <app-custom-input class="grid col-span-2" [control]="signupForm.controls.password" placeholder="Mot de passe" inputIcon="key-solid" inputType="password"></app-custom-input>
+        <app-custom-input class="grid col-span-2" [control]="signupForm.controls.passwordConfirmation" placeholder="Confirmer le mot de passe" inputIcon="key-solid" inputType="password"></app-custom-input>
+        <select class="duration-300 hover:shadow-md focus:box__shadow daisy-select text-[16px] rounded-[20px] bg-gray-100 placeholder-opacity-60 focus:border-primary-purple focus:outline-none col-span-2 custom-select" formControlName="licenceType"
                 [ngClass]="{
-                      'border-rose-500': signupForm.controls.licenseType.invalid && signupForm.controls.licenseType.dirty
+                      'border-rose-500': signupForm.controls.licenceType.invalid && signupForm.controls.licenceType.dirty
                       }"
                 required>
           <option value="" disabled>Type de permis souhaité</option>
           @for (licence of (licences$ | async); track licence.label) {
-            <option>{{licence.label}}</option>
+            <option [value]="licence.value">{{ licence.label }}</option>
           }
-          </select>
-        </div>
-        <button class="button__primary__purple">S'inscrire</button>
-        <p class="text-[12px] font-bold">Déjà membre ? <a routerLink="/signin"><span class="text-secondary-purple">Connecte toi.</span></a></p>
-      </form>
-    </div>
-  </section>
+        </select>
+      </div>
+      <button class="button__primary__purple">S'inscrire</button>
+      <p class="text-[12px] font-bold">Déjà membre ? <a routerLink="/signin"><span class="text-secondary-purple">Connecte toi.</span></a></p>
+    </form>
+  </div>
+</section>

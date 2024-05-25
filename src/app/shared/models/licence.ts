@@ -1,4 +1,4 @@
 export interface Licence {
-  id: number;
+  value: number;
   label: string;
 }
