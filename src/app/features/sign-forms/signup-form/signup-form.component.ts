@@ -1,26 +1,28 @@
 import {Component, OnInit} from '@angular/core';
 import {CustomInputComponent} from "../../../shared/ui/custom-input/custom-input.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule} from "@angular/forms";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import { CommonModule } from "@angular/common";
 import {LicenceService} from "../../../shared/services/licence/licence.service";
 import {Licence} from "../../../shared/models/licence";
-import {Observable, Observer} from "rxjs";
+import {Observable} from "rxjs";
 import {DrivingSchoolService} from "../../../shared/services/driving_school/driving-school.service";
 import {DrivingSchool} from "../../../shared/models/driving-school";
 import {UserService} from "../../../shared/services/user/user.service";
 import {User} from "../../../shared/models/user";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {CustomSnackbarComponent} from "../../../shared/ui/custom-snackbar/custom-snackbar.component";
 
 @Component({
   selector: 'app-signup-form',
   standalone: true,
-    imports: [
-      CustomInputComponent,
-      ReactiveFormsModule,
-      RouterLink,
-      CommonModule,
-      FormsModule
-    ],
+  imports: [
+    CustomInputComponent,
+    ReactiveFormsModule,
+    RouterLink,
+    CommonModule,
+    FormsModule,
+  ],
   templateUrl: './signup-form.component.html',
   styleUrl: './signup-form.component.css'
 })
@@ -28,7 +30,7 @@ export class SignupFormComponent implements OnInit {
   licences$!: Observable<Licence[]>;
   drivingSchools$! : Observable<DrivingSchool[]>;
 
-  constructor(private licenceService: LicenceService, private drivingSchoolService: DrivingSchoolService, private userService: UserService) {}
+  constructor(private router: Router, private snackBar: MatSnackBar, private licenceService: LicenceService, private drivingSchoolService: DrivingSchoolService, private userService: UserService) {}
 
   ngOnInit() {
     this.getLicences();
@@ -47,20 +49,29 @@ export class SignupFormComponent implements OnInit {
   })
 
   onSubmitSignup() {
-    if(this.signupForm.invalid) {
+    if (this.signupForm.invalid) {
       this.markFormGroupDirty(this.signupForm);
-      console.log('tous les champs ne sont pas renseignés')
-      return
+      this.showSnackbar('Veuillez renseigner tous les champs correctement.');
+      return;
     }
-    const user = this.convertFormGroupToUser(this.signupForm)
+
+    if(!this.passwordsAreMatching()) {
+      this.showSnackbar('Les mots de passe ne correspondent pas.');
+      return;
+    }
+
+    const user = this.convertFormGroupToUser(this.signupForm);
     this.userService.createUser(user).subscribe(
-      () => console.log("Success"),
-      (error) => console.log(error.error)
+      () => {
+        this.showSnackbar('Utilisateur créé !')
+        setTimeout(() => this.router.navigate(['/']), 2000);
+      },
+      (error) => this.showSnackbar(error.error)
     )
   }
 
   private passwordsAreMatching() : boolean {
-    return this.signupForm.controls.password === this.signupForm.controls.passwordConfirmation
+    return this.signupForm.controls.password.value === this.signupForm.controls.passwordConfirmation.value
   }
 
   private convertFormGroupToUser(form: FormGroup) : User {
@@ -90,6 +101,16 @@ export class SignupFormComponent implements OnInit {
       if (control instanceof FormGroup) {
         this.markFormGroupDirty(control);
       }
+    });
+  }
+
+  showSnackbar(message: string) {
+    this.snackBar.openFromComponent(CustomSnackbarComponent, {
+      duration: 2000,
+      horizontalPosition: 'right',
+      data: {
+        message: message,
+      },
     });
   }
 }
