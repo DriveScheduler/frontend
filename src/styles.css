@@ -61,3 +61,11 @@
     -webkit-box-shadow: 5px 5px 6px -3px rgba(0,0,0,0.5);
     box-shadow: 5px 5px 6px -3px rgba(0,0,0,0.5);  }
 }
+
+.error_snackbar {
+  --mdc-snackbar-container-color: #d20f13 !important;
+}
+
+.success_snackbar {
+  --mdc-snackbar-container-color: #d690e0 !important;
+}

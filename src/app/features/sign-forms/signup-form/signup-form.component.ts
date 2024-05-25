@@ -10,8 +10,7 @@ import {DrivingSchoolService} from "../../../shared/services/driving_school/driv
 import {DrivingSchool} from "../../../shared/models/driving-school";
 import {UserService} from "../../../shared/services/user/user.service";
 import {User} from "../../../shared/models/user";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {CustomSnackbarComponent} from "../../../shared/ui/custom-snackbar/custom-snackbar.component";
+import {CustomSnackbarService} from "../../../shared/ui/custom-snackbar/custom-snackbar.service";
 
 @Component({
   selector: 'app-signup-form',
@@ -30,7 +29,7 @@ export class SignupFormComponent implements OnInit {
   licences$!: Observable<Licence[]>;
   drivingSchools$! : Observable<DrivingSchool[]>;
 
-  constructor(private router: Router, private snackBar: MatSnackBar, private licenceService: LicenceService, private drivingSchoolService: DrivingSchoolService, private userService: UserService) {}
+  constructor(private customSnackbar: CustomSnackbarService, private router: Router, private licenceService: LicenceService, private drivingSchoolService: DrivingSchoolService, private userService: UserService) {}
 
   ngOnInit() {
     this.getLicences();
@@ -51,22 +50,22 @@ export class SignupFormComponent implements OnInit {
   onSubmitSignup() {
     if (this.signupForm.invalid) {
       this.markFormGroupDirty(this.signupForm);
-      this.showSnackbar('Veuillez renseigner tous les champs correctement.');
+      this.customSnackbar.show('Veuillez renseigner tous les champs correctement.', 'error');
       return;
     }
 
     if(!this.passwordsAreMatching()) {
-      this.showSnackbar('Les mots de passe ne correspondent pas.');
+      this.customSnackbar.show('Les mots de passe ne correspondent pas.', 'error');
       return;
     }
 
     const user = this.convertFormGroupToUser(this.signupForm);
     this.userService.createUser(user).subscribe(
       () => {
-        this.showSnackbar('Utilisateur créé !')
+        this.customSnackbar.show('Utilisateur créé !', 'success')
         setTimeout(() => this.router.navigate(['/']), 2000);
       },
-      (error) => this.showSnackbar(error.error)
+      (error) => this.customSnackbar.show(error.error, 'error')
     )
   }
 
@@ -104,13 +103,5 @@ export class SignupFormComponent implements OnInit {
     });
   }
 
-  showSnackbar(message: string) {
-    this.snackBar.openFromComponent(CustomSnackbarComponent, {
-      duration: 2000,
-      horizontalPosition: 'right',
-      data: {
-        message: message,
-      },
-    });
-  }
+
 }
