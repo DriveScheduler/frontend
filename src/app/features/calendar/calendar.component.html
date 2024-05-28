@@ -4,12 +4,12 @@
     <div class="col-span-1">
       <app-calendar-filters></app-calendar-filters>
     </div>
-    <ejs-schedule class="col-span-4 rounded-xl border border-primary-purple" #scheduleObj width='100%' cssClass='quick-info-template' height='600px' [selectedDate]="selectedDate" [eventSettings]="eventSettings" (actionComplete)="onActionComplete($event)">
+    <ejs-schedule class="col-span-4 rounded-xl border border-primary-purple" #scheduleObj width='100%' cssClass='quick-info-template' height='600px' [selectedDate]="selectedDate$" [eventSettings]="eventSettings" (actionComplete)="onActionComplete($event)" (created)="onCreate()">
         <!-- Header -->
 
             <ng-template #quickInfoTemplatesHeader let-data>
             <div class="quick-info-header">
-              <div class="quick-info-header-content" [ngStyle]="getHeaderStyles(data)">
+              <div class="quick-info-header-content" [ngStyle]="getHeaderStyles()">
                 <div class="quick-info-title">{{getHeaderTitle(data)}}</div>
                 <div class="duration-text">{{getHeaderDetails(data)}}</div>
               </div>
