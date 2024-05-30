@@ -24,6 +24,7 @@
     "@syncfusion/ej2-angular-dropdowns": "^25.1.41",
     "@syncfusion/ej2-angular-inputs": "^25.1.42",
     "@syncfusion/ej2-angular-schedule": "^25.1.42",
+    "jwt-decode": "^4.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
