@@ -29,7 +29,6 @@ export class AuthenticationService {
   }
 
   getToken(): string | null{
-    console.log('Token:', localStorage.getItem('token'));
     return localStorage.getItem('token');
   }
 
@@ -44,10 +43,8 @@ export class AuthenticationService {
 
   getUserId(): string {
     const token = this.getToken();
-    console.log('token:', token);
     if (token) {
       const decoded: any = jwtDecode(token);
-      console.log('decoded:', decoded);
       return decoded.id;
     }
     return '';

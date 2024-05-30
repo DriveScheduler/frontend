@@ -20,12 +20,10 @@ export class ApiHttpInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log('Token : ' + this.jwtToken);
     if (this.jwtToken != '') {
       req = req.clone({
         setHeaders: { Authorization: `Bearer ${this.jwtToken}` },
       });
-      console.log('Bearer renvoyé : ' + this.jwtToken);
     }
 
     return next.handle(req).pipe(
