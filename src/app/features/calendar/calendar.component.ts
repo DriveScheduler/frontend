@@ -1,13 +1,12 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ScheduleComponent, MonthService, DayService, WeekService, WorkWeekService, AgendaService, MonthAgendaService, EventSettingsModel, ScheduleModule, ActionEventArgs } from '@syncfusion/ej2-angular-schedule';
-import { Internationalization, closest } from '@syncfusion/ej2-base';
+import { Internationalization } from '@syncfusion/ej2-base';
 import { CommonModule  } from '@angular/common';
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
 import { LessonService } from '../../shared/services/lessons/services/lesson.service';
 import {CalendarFiltersComponent} from "./calendar-filters/calendar-filters.component";
-import { userId } from '../../../assets/mock/data';
 import { Lesson } from '../../shared/models/lesson';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-calendar',
@@ -38,7 +37,7 @@ export class CalendarComponent{
   constructor(private lessonService: LessonService) {}
   
   public onCreate(): void {
-    this.getLessons(userId, false);
+    this.getLessons(false);
     this.refreshEvents();
   }
 
@@ -58,7 +57,7 @@ export class CalendarComponent{
 
   public onActionComplete(args: ActionEventArgs) {
     if (args.requestType === "viewNavigate" || args.requestType === "dateNavigate") {
-      this.getLessons(userId, false);
+      this.getLessons(false);
       this.refreshEvents();
     }
   }
@@ -80,35 +79,35 @@ export class CalendarComponent{
           this.scheduleObj.refreshEvents();
   }
 
-  private getLessons(id: string, flag: boolean){
+  private getLessons(flag: boolean){
     const currentViewDates = this.scheduleObj.getCurrentViewDates();
     const startDate = currentViewDates[0];
     const endDate = currentViewDates[currentViewDates.length - 1];
     
-    this.lessons$ = this.lessonService.getLessons(id, startDate, endDate, flag);
+    this.lessons$ = this.lessonService.getLessons(startDate, endDate, flag);
   }
 
   public reserverCreneau(idLesson: number): void {
-    this.lessonService.addStudentToLesson(idLesson,userId).subscribe((data) => {
+    this.lessonService.addStudentToLesson(idLesson).subscribe((data) => {
       this.scheduleObj.closeQuickInfoPopup();
       this.refreshEvents();
   });}
 
   public fileDattente(idLesson: number): void {
-    this.lessonService.addStudentToWaitingList(idLesson,userId).subscribe((data) => {
+    this.lessonService.addStudentToWaitingList(idLesson).subscribe((data) => {
       this.scheduleObj.closeQuickInfoPopup();
       this.refreshEvents();
   })}
 
   public quitterFileAttente(idLesson: number): void {
-    this.lessonService.removeStudentFromWaitingList(idLesson,userId).subscribe((data) => {
+    this.lessonService.removeStudentFromWaitingList(idLesson).subscribe((data) => {
       this.scheduleObj.closeQuickInfoPopup();
       this.refreshEvents();
   });
   }
   
   public async annulerReservation(idLesson: number){
-    this.lessonService.removeStudentFromLesson(idLesson,userId).subscribe((data) => {
+    this.lessonService.removeStudentFromLesson(idLesson).subscribe((data) => {
       this.scheduleObj.closeQuickInfoPopup();
       this.refreshEvents();
   });}
