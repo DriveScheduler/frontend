@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
-import {CustomInputComponent} from "../../../shared/components/custom-input/custom-input.component";
+import {CustomInputComponent} from "src/app/shared/components/custom-input/custom-input.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {AuthenticationService} from '../../../shared/services/authentication/authentication.service';
-import { CustomSnackbarService } from "../../../shared/components/custom-snackbar/custom-snackbar.service";
+import {AuthenticationService} from 'src/app/shared/services/authentication/authentication.service';
+import { CustomSnackbarService } from "src/app/shared/components/custom-snackbar/custom-snackbar.service";
 
 @Component({
   selector: 'app-signin-form',
