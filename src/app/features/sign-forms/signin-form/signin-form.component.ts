@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {RouterLink} from "@angular/router";
-import {CustomInputComponent} from "../../../shared/ui/custom-input/custom-input.component";
+import {CustomInputComponent} from "../../../shared/components/custom-input/custom-input.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 
 @Component({

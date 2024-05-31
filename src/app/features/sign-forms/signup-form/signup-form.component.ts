@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CustomInputComponent} from "../../../shared/ui/custom-input/custom-input.component";
+import {CustomInputComponent} from "../../../shared/components/custom-input/custom-input.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule} from "@angular/forms";
 import {Router, RouterLink} from "@angular/router";
 import { CommonModule } from "@angular/common";
@@ -10,7 +10,7 @@ import {DrivingSchoolService} from "../../../shared/services/driving_school/driv
 import {DrivingSchool} from "../../../shared/models/driving-school";
 import {UserService} from "../../../shared/services/user/user.service";
 import {User} from "../../../shared/models/user";
-import {CustomSnackbarService} from "../../../shared/ui/custom-snackbar/custom-snackbar.service";
+import {CustomSnackbarService} from "../../../shared/components/custom-snackbar/custom-snackbar.service";
 
 @Component({
   selector: 'app-signup-form',
