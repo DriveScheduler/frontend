@@ -1,10 +1,10 @@
-<section class="overflow-hidden py-[10rem] section-p-m">
+<section class="overflow-hidden pt-[11rem] section-p-nb">
   <h1 class="mb-2 font-bold text-xl">Mon planning</h1>
   <div class="grid grid-cols-5 xl:gap-2 gap-4">
     <div class="col-span-1">
       <app-calendar-filters></app-calendar-filters>
     </div>
-    <ejs-schedule class="col-span-4 rounded-xl border border-primary-purple" #scheduleObj cssClass='quick-info-template' height='640px' [selectedDate]="selectedDate$" [eventSettings]="eventSettings" (actionComplete)="onActionComplete($event)" (created)="onCreate()" (cellClick)="onCellClick($event)">
+    <ejs-schedule class="col-span-4 rounded-xl border border-primary-purple" #scheduleObj cssClass='quick-info-template' height='660px' [selectedDate]="selectedDate$" [eventSettings]="eventSettings" (actionComplete)="onActionComplete($event)" (created)="onCreate()" (cellClick)="onCellClick($event)">
         <!-- Header -->
             <ng-template #quickInfoTemplatesHeader let-data>
             <div class="quick-info-header">
