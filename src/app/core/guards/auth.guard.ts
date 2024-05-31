@@ -1,11 +1,19 @@
 import { inject } from "@angular/core";
+import { jwtDecode } from 'jwt-decode';
 import { Router } from "@angular/router";
 
 export const AuthGuard = () => {
   const router = inject(Router);
-  // Si le user n'est pas connecté, alors il faudra le renvoyer sur la page d'error
-  if(true){
-    router.navigateByUrl('/error')
+  const token = localStorage.getItem('token');
+
+  if (!token || !isTokenValid(token)) {
+    router.navigateByUrl('/error');
+    return false;
   }
-  return true
-}
+  return true;
+};
+
+const isTokenValid = (token: string): boolean => {
+  const decodedToken: any = jwtDecode(token);
+  return decodedToken.exp > Math.floor(Date.now() / 1000);
+};
