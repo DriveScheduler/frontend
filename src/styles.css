@@ -25,7 +25,7 @@
 }
 
 .section-p-m {
-  @apply xl:px-14 xl:pb-20 md:px-12 md:pb-12 px-4 pb-4
+  @apply xl:px-14 xl:pb-20 md:px-12 md:pb-12 px-4 pb-4;
 }
 
 .padding {
