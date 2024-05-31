@@ -1,11 +1,12 @@
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ScheduleComponent, MonthService, DayService, WeekService, WorkWeekService, AgendaService, MonthAgendaService, EventSettingsModel, ScheduleModule, ActionEventArgs } from '@syncfusion/ej2-angular-schedule';
-import { extend, Internationalization, closest } from '@syncfusion/ej2-base';
+import { Internationalization } from '@syncfusion/ej2-base';
 import { CommonModule  } from '@angular/common';
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
 import { LessonService } from '../../shared/services/lessons/services/lesson.service';
 import {CalendarFiltersComponent} from "./calendar-filters/calendar-filters.component";
-import { userId } from '../../../assets/mock/data';
+import { Lesson } from '../../shared/models/lesson';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-calendar',
@@ -16,13 +17,14 @@ import { userId } from '../../../assets/mock/data';
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.css'
 })
-export class CalendarComponent {
+export class CalendarComponent{
+
+  selectedDate$: Date = new Date();
+  lessons$!: Observable<Lesson[]>;
+
   @ViewChild('scheduleObj') public scheduleObj!: ScheduleComponent;
 
-  public selectedDate: Date = new Date(2024, 4, 5);
   public intl: Internationalization = new Internationalization();
-
-  constructor(private lessonService: LessonService) {}
 
   public eventSettings: EventSettingsModel = {
     fields: {
@@ -32,7 +34,14 @@ export class CalendarComponent {
     }
    };
 
-  public getHeaderStyles(data: Record<string, any>): Record<string, any> {
+  constructor(private lessonService: LessonService) {}
+  
+  public onCreate(): void {
+    this.getLessons(false);
+    this.refreshEvents();
+  }
+
+  public getHeaderStyles(): Record<string, any> {
       return { background: '#475387', color: '#FFFFFF' };
   }
 
@@ -46,71 +55,61 @@ export class CalendarComponent {
       this.intl.formatDate(data.endTime, { skeleton: 'hm' }) + ')';
   }
 
-  public buttonClickActions(e: Event): void {
-    const quickPopup: HTMLElement = closest(e.target as HTMLElement, '.e-quick-popup-wrapper') as HTMLElement;
-    this.scheduleObj.openQuickInfoPopup({
-      Subject: 'Meeting',
-      StartTime: new Date(2023, 2, 6, 20, 0, 0),
-      EndTime: new Date(2023, 2, 6, 21, 0, 0)
-  });
-  }
-
-  public async onActionComplete(args: ActionEventArgs): Promise<void> {
+  public onActionComplete(args: ActionEventArgs) {
     if (args.requestType === "viewNavigate" || args.requestType === "dateNavigate") {
-        const currentViewDates = this.scheduleObj.getCurrentViewDates();
-        const startDate = currentViewDates[0];
-        const endDate = currentViewDates[currentViewDates.length - 1];
-
-        console.log(startDate);
-        console.log(endDate);
-
-        const data = await this.getLessons(userId, startDate, endDate, false);
-
-        // Clear existing events
-        this.scheduleObj.eventSettings.dataSource = [];
-        this.scheduleObj.refreshEvents();
-
-        // Add new events
-        this.scheduleObj.eventSettings.dataSource = data as any[];
-        this.scheduleObj.refreshEvents();
-
-        console.log(this.eventSettings.dataSource);
+      this.getLessons(false);
+      this.refreshEvents();
     }
-}
-
-  private async getLessons(id: string, startDate: Date, endDate: Date, flag: boolean): Promise<any[]> {
-    return new Promise<any[]>((resolve, reject) => {
-        this.lessonService.getLessons(id, startDate, endDate, flag).subscribe((data) => {
-            console.log("on lance la requete");
-            resolve(data as any[]);
-        }, (error) => {
-            reject(error);
-        });
-    });
   }
 
-  public onMonitorChange(moniteur: string): void {
-    if (moniteur === 'All') {
-      this.scheduleObj.eventSettings.dataSource = this.eventSettings.dataSource;
-    } else {
-      this.scheduleObj.eventSettings.dataSource = (this.eventSettings.dataSource as any[]).filter(event => event.Moniteur === moniteur);
-    }
-    this.scheduleObj.refreshEvents();
+  public refreshEvents(): void {
+          // Clear existing events
+          this.scheduleObj.eventSettings.dataSource = [];
+          this.scheduleObj.refreshEvents();
+  
+          // Add new events
+          this.lessons$.subscribe(
+            lessons => {
+              this.scheduleObj.eventSettings.dataSource = lessons as Record<string, any>[];
+            },
+            error => {
+              console.error('Erreur lors de la récupération des leçons', error);
+            }
+          );
+          this.scheduleObj.refreshEvents();
+  }
+
+  private getLessons(flag: boolean){
+    const currentViewDates = this.scheduleObj.getCurrentViewDates();
+    const startDate = currentViewDates[0];
+    const endDate = currentViewDates[currentViewDates.length - 1];
+    
+    this.lessons$ = this.lessonService.getLessons(startDate, endDate, flag);
   }
 
   public reserverCreneau(idLesson: number): void {
-    this.lessonService.addStudentToLesson(idLesson,userId).subscribe((data) => {
+    this.lessonService.addStudentToLesson(idLesson).subscribe((data) => {
+      this.scheduleObj.closeQuickInfoPopup();
+      this.refreshEvents();
   });}
 
   public fileDattente(idLesson: number): void {
-    this.lessonService.addStudentToWaitingList(idLesson,userId).subscribe((data) => {
+    this.lessonService.addStudentToWaitingList(idLesson).subscribe((data) => {
+      this.scheduleObj.closeQuickInfoPopup();
+      this.refreshEvents();
   })}
 
   public quitterFileAttente(idLesson: number): void {
-    //this.lessonService.removeStudentFromLesson(idLesson,userId).subscribe((data) => {
-  };
-
-  public async annulerReservation(idLesson: number){
-    this.lessonService.removeStudentFromLesson(idLesson,userId).subscribe();
+    this.lessonService.removeStudentFromWaitingList(idLesson).subscribe((data) => {
+      this.scheduleObj.closeQuickInfoPopup();
+      this.refreshEvents();
+  });
   }
+  
+  public async annulerReservation(idLesson: number){
+    this.lessonService.removeStudentFromLesson(idLesson).subscribe((data) => {
+      this.scheduleObj.closeQuickInfoPopup();
+      this.refreshEvents();
+  });}
 }
+
