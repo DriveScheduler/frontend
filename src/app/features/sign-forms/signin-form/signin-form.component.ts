@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {CustomInputComponent} from "../../../shared/components/custom-input/custom-input.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthenticationService} from '../../../shared/services/authentication/authentication.service';
@@ -17,7 +17,7 @@ import { CustomSnackbarService } from "../../../shared/components/custom-snackba
   styleUrl: './signin-form.component.css'
 })
 export class SigninFormComponent {
-  constructor(private authenticationService: AuthenticationService, private customSnackbar: CustomSnackbarService) {}
+  constructor(private authenticationService: AuthenticationService, private customSnackbar: CustomSnackbarService, private router: Router) {}
 
   signinForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -36,7 +36,8 @@ export class SigninFormComponent {
 
     this.authenticationService.login(email, password).subscribe(
       response => {
-        this.customSnackbar.show('Connexion réussie', 'success')
+        this.customSnackbar.show('Connexion réussite', 'success')
+        this.router.navigateByUrl('/calendar');
       },
       error => {
         this.customSnackbar.show(error.error, 'error')
