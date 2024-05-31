@@ -1,11 +1,10 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { SignupFormComponent } from './signup-form.component';
-import { LicenceService} from "../../../shared/services/licence/licence.service";
-import { Licence} from "../../../shared/models/licence";
+import { LicenceService} from "src/app/shared/services/licence/licence.service";
+import { Licence} from "src/app/shared/models/licence";
 import { RouterTestingModule } from '@angular/router/testing';
 import {of} from "rxjs";
-import {environment} from "../../../../environment/environment";
 
 describe('SignupFormComponent', () => {
   let component: SignupFormComponent;

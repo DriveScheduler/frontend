@@ -3,9 +3,9 @@ import { ScheduleComponent, MonthService, DayService, WeekService, WorkWeekServi
 import { Internationalization } from '@syncfusion/ej2-base';
 import { CommonModule  } from '@angular/common';
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
-import { LessonService } from '../../shared/services/lessons/services/lesson.service';
-import {CalendarFiltersComponent} from "./calendar-filters/calendar-filters.component";
-import { Lesson } from '../../shared/models/lesson';
+import { LessonService } from 'src/app/shared/services/lessons/services/lesson.service';
+import {CalendarFiltersComponent} from "src/app/features/calendar/calendar-filters/calendar-filters.component";
+import { Lesson } from 'src/app/shared/models/lesson';
 import { Observable, map } from 'rxjs';
 
 @Component({
@@ -35,7 +35,7 @@ export class CalendarComponent{
    };
 
   constructor(private lessonService: LessonService) {}
-  
+
   public onCreate(): void {
     this.getLessons(false);
     this.refreshEvents();
@@ -66,7 +66,7 @@ export class CalendarComponent{
           // Clear existing events
           this.scheduleObj.eventSettings.dataSource = [];
           this.scheduleObj.refreshEvents();
-  
+
           // Add new events
           this.lessons$.subscribe(
             lessons => {
@@ -83,7 +83,7 @@ export class CalendarComponent{
     const currentViewDates = this.scheduleObj.getCurrentViewDates();
     const startDate = currentViewDates[0];
     const endDate = currentViewDates[currentViewDates.length - 1];
-    
+
     this.lessons$ = this.lessonService.getLessons(startDate, endDate, flag);
   }
 
@@ -105,7 +105,7 @@ export class CalendarComponent{
       this.refreshEvents();
   });
   }
-  
+
   public async annulerReservation(idLesson: number){
     this.lessonService.removeStudentFromLesson(idLesson).subscribe((data) => {
       this.scheduleObj.closeQuickInfoPopup();

@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
-import {Licence} from "../../../shared/models/licence";
-import {User} from "../../../shared/models/user";
-import {UserService} from "../../../shared/services/user/user.service";
+import {Licence} from "src/app/shared/models/licence";
+import {User} from "src/app/shared/models/user";
+import {UserService} from "src/app/shared/services/user/user.service";
 import {AsyncPipe} from "@angular/common";
-import {LicenceService} from "../../../shared/services/licence/licence.service";
+import {LicenceService} from "src/app/shared/services/licence/licence.service";
 
 @Component({
   selector: 'app-calendar-filters',

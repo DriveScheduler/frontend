@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
-import {environment} from "../../../../environment/environment";
+import {environment} from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
