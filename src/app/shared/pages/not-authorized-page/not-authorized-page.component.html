@@ -1,1 +1,19 @@
-<p>not-authorized-page works!</p>
+<section class="relative flex min-h-screen justify-center overflow-hidden py-[10rem]">
+  <div class="flex flex-col xl:flex-row items-center">
+    <img
+      src="/assets/images/access_denied.svg"
+      alt="Error image"
+      class="object-contain">
+    <div class="flex flex-col items-center">
+      <h1 class="2xl:text-[58px] sm:text-[48px] text-[30px] font-extrabold xl:w-[95%] leading-none text-center">
+        ERREUR
+      </h1>
+      <p class="text-[24px] text-black-100 font-light mt-10 xl:w-[70%] text-center">
+        Page <span class="text-primary-purple">inaccessible</span>. Connecte-toi pour accéder à cette fonctionnalité.
+      </p>
+      <a routerLink="/signin">
+        <button class="button__primary__purple px-10 mt-10">Connexion</button>
+      </a>
+    </div>
+  </div>
+</section>

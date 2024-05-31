@@ -8,13 +8,26 @@ export const routes: Routes = [
     loadComponent: () => import('./features/calendar/calendar.component').then(c => c.CalendarComponent),
     canActivate: [AuthGuard]
   },
-  { path: 'signin',
+  {
+    path: 'account',
+    loadComponent: () => import('./features/account/account.component').then(c => c.AccountComponent),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'dashboard',
+    loadComponent: () => import('./features/dashboard/dashboard.component').then(c => c.DashboardComponent),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'signin',
     loadComponent: () => import('./features/sign-forms/signin-form/signin-form.component').then(c => c.SigninFormComponent)
   },
-  { path: 'signup',
+  {
+    path: 'signup',
     loadComponent: () => import('./features/sign-forms/signup-form/signup-form.component').then(c => c.SignupFormComponent)
   },
-  { path: 'error',
+  {
+    path: 'error',
     loadComponent: () => import('./shared/pages/not-authorized-page/not-authorized-page.component').then(c => c.NotAuthorizedPageComponent)
   },
 ];
