@@ -1,19 +1,15 @@
 import { inject } from "@angular/core";
-import { jwtDecode } from 'jwt-decode';
 import { Router } from "@angular/router";
+import { AuthenticationService} from "src/app/shared/services/authentication/authentication.service";
 
 export const AuthGuard = () => {
   const router = inject(Router);
-  const token = localStorage.getItem('token');
+  const authService = inject(AuthenticationService);
+  const token = authService.getToken()
 
-  if (!token || !isTokenValid(token)) {
+  if (!token || !authService.isTokenValid(token)) {
     router.navigateByUrl('/error');
     return false;
   }
   return true;
-};
-
-const isTokenValid = (token: string): boolean => {
-  const decodedToken: any = jwtDecode(token);
-  return decodedToken.exp > Math.floor(Date.now() / 1000);
 };

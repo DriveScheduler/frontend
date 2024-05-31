@@ -36,7 +36,7 @@ export class SigninFormComponent {
 
     this.authenticationService.login(email, password).subscribe(
       response => {
-        this.customSnackbar.show('Connexion réussite', 'success')
+        this.customSnackbar.show('Connexion réussie', 'success')
       },
       error => {
         this.customSnackbar.show(error.error, 'error')
