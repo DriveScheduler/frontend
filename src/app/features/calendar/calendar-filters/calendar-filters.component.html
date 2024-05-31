@@ -18,25 +18,10 @@
             @for (teacher of (teachers$ | async); track teacher.email) {
               <div class="flex justify-between items-center">
                 <span class="text-sm">{{ teacher.firstName }} {{ teacher.name }}</span>
-                <input type="checkbox" checked class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
+                <input type="checkbox" (change)="toggleTeacherSelection(teacher.id, $event)" class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
               </div>
             }
           </div>
-        </div>
-      </div>
-      <div tabindex="0"  class="daisy-collapse daisy-collapse-arrow border border-primary-blue">
-        <input type="checkbox" />
-        <div class="daisy-collapse-title bg-white text-l font-regular">
-          <h1 class="font-semibold">Type de permis</h1>
-        </div>
-        <div class="daisy-collapse-content bg-white flex flex-col gap-4">
-          @for (licence of (licences$ | async); track licence.label) {
-            <div class="flex justify-between items-center">
-              <span class="text-sm">{{ licence.label }}</span>
-              <input type="checkbox" checked class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
-            </div>
-
-          }
         </div>
       </div>
       <div tabindex="0"  class="daisy-collapse daisy-collapse-arrow border border-primary-blue">
@@ -46,12 +31,8 @@
         </div>
         <div class="daisy-collapse-content bg-white flex flex-col gap-4">
           <div class="flex justify-between items-center">
-            <span class="text-sm">Disponible</span>
-            <input type="checkbox" checked class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="text-sm">Complet</span>
-            <input type="checkbox" checked class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
+            <span class="text-sm" >Disponible</span>
+            <input type="checkbox" (change)="toggleStatusSelection($event)" class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
           </div>
         </div>
       </div>

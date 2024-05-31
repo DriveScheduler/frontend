@@ -75,6 +75,7 @@ export class SignupFormComponent implements OnInit {
 
   private convertFormGroupToUser(form: FormGroup) : User {
     return {
+      id: '',
       name: form.value.name,
       firstName: form.value.firstName,
       email: form.value.email,

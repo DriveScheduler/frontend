@@ -27,6 +27,8 @@ export class CalendarComponent{
 
   selectedDate$: Date = new Date();
   lessons$!: Observable<Lesson[]>;
+  selectedTeachers$ : string[] = [];
+  onlyEmptyLessons$ : boolean = false;
 
   @ViewChild('scheduleObj') public scheduleObj!: ScheduleComponent;
 
@@ -51,7 +53,7 @@ export class CalendarComponent{
   
   
   public onCreate(): void {
-    this.getLessons(false);
+    this.getLessons();
     this.refreshEvents();
   }
 
@@ -62,6 +64,12 @@ export class CalendarComponent{
     });
   }
 
+  public onFilterChange(filters: any) {
+    this.selectedTeachers$ = filters.teachers;
+    this.onlyEmptyLessons$ = filters.onlyEmpty;
+    this.getLessons();
+    this.refreshEvents();
+  }
 
   public getHeaderStyles(): Record<string, any> {
       return { background: '#475387', color: '#FFFFFF' };
@@ -79,7 +87,7 @@ export class CalendarComponent{
 
   public onActionComplete(args: ActionEventArgs) {
     if (args.requestType === "viewNavigate" || args.requestType === "dateNavigate") {
-      this.getLessons(false);
+      this.getLessons();
       this.refreshEvents();
     }
   }
@@ -101,12 +109,12 @@ export class CalendarComponent{
           this.scheduleObj.refreshEvents();
   }
 
-  private getLessons(flag: boolean){
+  private getLessons(){
     const currentViewDates = this.scheduleObj.getCurrentViewDates();
     const startDate = currentViewDates[0];
     const endDate = currentViewDates[currentViewDates.length - 1];
     
-    this.lessons$ = this.lessonService.getLessons(startDate, endDate, flag);
+    this.lessons$ = this.lessonService.getLessons(startDate, endDate, this.onlyEmptyLessons$, this.selectedTeachers$);
   }
 
   public reserverCreneau(idLesson: number): void {

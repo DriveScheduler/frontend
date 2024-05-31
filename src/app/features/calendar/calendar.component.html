@@ -2,7 +2,7 @@
   <h1 class="mb-4 font-bold text-xl">Mon planning</h1>
   <div class="grid grid-cols-5 xl:gap-4 gap-2">
     <div class="col-span-1">
-      <app-calendar-filters></app-calendar-filters>
+      <app-calendar-filters (filterChange)="onFilterChange($event)"></app-calendar-filters>
     </div>
     <ejs-schedule class="col-span-4 rounded-xl border border-primary-purple" #scheduleObj width='100%' cssClass='quick-info-template' height='600px' [selectedDate]="selectedDate$" [eventSettings]="eventSettings" (actionComplete)="onActionComplete($event)" (created)="onCreate()" (cellClick)="onCellClick($event)">
         <!-- Header -->
