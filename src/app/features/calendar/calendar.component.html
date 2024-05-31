@@ -4,9 +4,8 @@
     <div class="col-span-1">
       <app-calendar-filters></app-calendar-filters>
     </div>
-    <ejs-schedule class="col-span-4 rounded-xl border border-primary-purple" #scheduleObj width='100%' cssClass='quick-info-template' height='600px' [selectedDate]="selectedDate$" [eventSettings]="eventSettings" (actionComplete)="onActionComplete($event)" (created)="onCreate()">
+    <ejs-schedule class="col-span-4 rounded-xl border border-primary-purple" #scheduleObj width='100%' cssClass='quick-info-template' height='600px' [selectedDate]="selectedDate$" [eventSettings]="eventSettings" (actionComplete)="onActionComplete($event)" (created)="onCreate()" (cellClick)="onCellClick($event)">
         <!-- Header -->
-
             <ng-template #quickInfoTemplatesHeader let-data>
             <div class="quick-info-header">
               <div class="quick-info-header-content" [ngStyle]="getHeaderStyles()">
@@ -21,13 +20,19 @@
             [ngTemplateOutletContext]="{data:data}"></ng-container>
           </ng-template>
           <ng-template #cellContent let-data="data">
-            <div class="quick-info-content">
+            <div class="quick-info-content" [formGroup]="lessonFormCreation">
               <div class="e-cell-content">
                 <div class="quick-content-area">
+                  <label for="title" class="font-bold">Titre</label>
+                  <ejs-textbox #titleObj formControlName="name" id="title" placeholder="Conduite"></ejs-textbox>
                 </div>
                 <div class="quick-content-area">
+                  <ejs-datetimepicker formControlName="start" id="StartTime" class="e-field" data-name="StartTime" format="dd/MM/yy HH:mm" #startTime>
+                  </ejs-datetimepicker>
                 </div>
                 <div class="quick-content-area">
+                  <label for="duration" class="font-bold">Durée en minutes (max 120)</label>
+                  <ejs-textbox #titleObj formControlName="duration" id="duration" placeholder="Durée"></ejs-textbox>               
                 </div>
               </div>
             </div>
@@ -57,9 +62,7 @@
           </ng-template>
           <ng-template #cellFooter let-data="data">
             <div class="e-cell-footer">
-              <button ejs-button id="more-details" cssClass="e-flat">Reserver</button>
-              <button ejs-button id="add" cssClass="e-flat"
-                >Add</button>
+              <button ejs-button id="add" cssClass="e-flat" [isPrimary]="true"(click)="creerLecon()" [disabled]="!lessonFormCreation.valid" >Créer</button>
             </div>
           </ng-template>
           <ng-template #eventFooter let-data="data">

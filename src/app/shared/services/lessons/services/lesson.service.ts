@@ -30,4 +30,8 @@ export class LessonService {
   public removeStudentFromWaitingList(lessonId:number){
     return this.http.put(`${environment.api}/Lesson/RemoveStudentFromWaitingList`,{lessonId:lessonId});
   }
+
+  public createLesson(lessonData:any){
+    return this.http.post(`${environment.api}/Lesson/Create`,lessonData);
+  }
 }
