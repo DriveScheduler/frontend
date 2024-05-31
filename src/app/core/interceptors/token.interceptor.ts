@@ -8,38 +8,23 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { AuthenticationService } from 'src/app/shared/services/authentication/authentication.service';
 
 @Injectable(
   {providedIn: 'root'}
 )
 export class ApiHttpInterceptor implements HttpInterceptor {
-  jwtToken: String = localStorage.getItem('token') || '';
-  constructor() {}
+  constructor(private authService: AuthenticationService) {}
 
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    if (this.jwtToken != '') {
-      req = req.clone({
-        setHeaders: { Authorization: `Bearer ${this.jwtToken}` },
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const token = this.authService.getToken();
+    if (token) {
+      const cloned = req.clone({
+        headers: req.headers.set('Authorization', `Bearer ${token}`)
       });
+      return next.handle(cloned);
+    } else {
+      return next.handle(req);
     }
-
-    return next.handle(req).pipe(
-      tap((evt: HttpEvent<any>) => {
-        if (evt instanceof HttpResponse) {
-          let tab: Array<String>;
-          let enteteAuthorization = evt.headers.get('Authorization');
-          if (enteteAuthorization != null) {
-            tab = enteteAuthorization.split(/Bearer\s+(.*)$/i);
-            if (tab.length > 1) {
-              this.jwtToken = tab[1];
-              console.log('Bearer récupéré : ' + this.jwtToken);
-            }
-          }
-        }
-      })
-    );
   }
 }
