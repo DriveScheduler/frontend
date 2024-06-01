@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import {HeroComponent} from "./features/hero/hero.component";
-import {AuthGuard} from "./core/guards/auth.guard";
+import {AuthGuard, AuthGuardAdministration} from "./core/guards/auth.guard";
 
 export const routes: Routes = [
   { path: '', component: HeroComponent},
@@ -17,6 +17,11 @@ export const routes: Routes = [
     path: 'dashboard',
     loadComponent: () => import('./features/dashboard/dashboard.component').then(c => c.DashboardComponent),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'administration',
+    loadComponent: () => import('./features/administration/administration.component').then(c => c.AdministrationComponent),
+    canActivate: [AuthGuardAdministration]
   },
   {
     path: 'signin',

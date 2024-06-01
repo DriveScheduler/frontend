@@ -27,16 +27,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
 
     if (this.isUserLoggedIn) {
-      this.loadUserDetails();
+      this.userService.getUser().subscribe();
+      this.userSubscription = this.userService.user$.subscribe(user => {
+        if (user) {
+          this.userFirstName = user.firstName;
+        }
+      });
     }
-  }
-
-  private loadUserDetails(): void {
-    this.userSubscription = this.userService.user$.subscribe(user => {
-      if (user) {
-        this.userFirstName = user.firstName;
-      }
-    });
   }
 
   ngOnDestroy(): void {
