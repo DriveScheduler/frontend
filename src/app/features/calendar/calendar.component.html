@@ -67,15 +67,21 @@
           </ng-template>
           <ng-template #eventFooter let-data="data">
             <div class="e-event-footer">
-              @if(data.state.value==0){
-                <button ejs-button id="book" [isPrimary]="true" (click)="reserverCreneau(data.id)">Réserver </button>
-              }@else if(data.state.value==1){
-                <button ejs-button id="queue" (click)="fileDattente(data.id)">File d'attente</button>
-              }@else if(data.state.value==2){
-                <button ejs-button id="cancel" [isPrimary]="true" (click)="annulerReservation(data.id)">Annuler réservation</button>
-              }@else if(data.state.value==3){
-                <button ejs-button id="quitQueue" [isPrimary]="true" (click)="quitterFileAttente(data.id)">Quitter File d'attente</button>
+              @if (user.userType.value==0) {
+                @if(data.state.value==0){
+                  <button ejs-button id="book" [isPrimary]="true" (click)="reserverCreneau(data.id)">Réserver </button>
+                }@else if(data.state.value==1){
+                  <button ejs-button id="queue" (click)="fileDattente(data.id)">File d'attente</button>
+                }@else if(data.state.value==2){
+                  <button ejs-button id="cancel" [isPrimary]="true" (click)="annulerReservation(data.id)">Annuler réservation</button>
+                }@else if(data.state.value==3){
+                  <button ejs-button id="quitQueue" [isPrimary]="true" (click)="quitterFileAttente(data.id)">Quitter File d'attente</button>
+                }
+              }@else {
+                  <button ejs-button id="editLesson">Modifier</button>
+                  <button ejs-button id="deleteLesson" [isPrimary]="true" (click)="supprimerLecon(data.id)">Supprimer</button>
               }
+
             </div>
           </ng-template>
     </ejs-schedule>

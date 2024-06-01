@@ -197,5 +197,17 @@ export class CalendarComponent{
         (error) => this.customSnackbar.show(error.error, 'error')
       );
   }
+
+  public supprimerLecon(idLesson: number): void {
+    this.lessonService.deleteLesson(idLesson).subscribe(
+      (response) => {
+        this.customSnackbar.show('Cours supprimé !', 'success')
+        this.scheduleObj.closeQuickInfoPopup();
+        this.refreshEvents();
+      },
+      (error) => this.customSnackbar.show(error.error, 'error')
+    );
+  }
+
 }
 

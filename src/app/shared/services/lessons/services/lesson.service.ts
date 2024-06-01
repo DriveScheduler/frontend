@@ -42,4 +42,8 @@ export class LessonService {
   public createLesson(lessonData:any){
     return this.http.post(`${environment.api}/Lesson/Create`,lessonData);
   }
+
+  public deleteLesson(lessonId: number) {
+    return this.http.delete(`${environment.api}/Lesson/Delete`, { params: { lessonId: lessonId.toString() } });
+  }
 }
