@@ -1,13 +1,18 @@
 <section class="relative flex min-h-screen flex-col justify-center overflow-hidden py-[10rem] px-[2rem]">
-  <div class="absolute inset-0 bg-[url(/assets/images/pattern-background-desktop.svg)] bg-no-repeat bg-cover -left-[20%] bottom-[-100%]"></div>
-  <div class="relative bg-white min-w-[500px] max-w-screen-xl py-16 shadow-xl ring-1 ring-gray-900/5 mx-auto rounded-lg px-10">
+  <div
+    class="absolute inset-0 bg-[url(/assets/images/pattern-background-desktop.svg)] bg-no-repeat bg-cover -left-[20%] bottom-[-100%]">
+  </div>
+  <div
+    class="relative bg-white min-w-[500px] max-w-screen-xl py-16 shadow-xl ring-1 ring-gray-900/5 mx-auto rounded-lg px-10">
     <div class="absolute -left-[5.6rem] top-[2rem]">
-      <img src="assets/images/undraw_fingerprint_login_re.svg"/>
+      <img src="assets/images/undraw_fingerprint_login_re.svg" />
     </div>
     <form class="flex flex-col gap-5 items-center" [formGroup]="signinForm" (ngSubmit)="onSubmitSignin()">
       <h1 class="text-2xl font-regular uppercase text-primary-purple">Connexion</h1>
-      <app-custom-input [control]="signinForm.controls.email" placeholder="Email" inputIcon="envelope-solid"></app-custom-input>
-      <app-custom-input [control]="signinForm.controls.password" placeholder="Mot de passe" inputIcon="key-solid" inputType="password"></app-custom-input>
+      <app-custom-input [control]="signinForm.controls.email" placeholder="Email"
+        inputIcon="envelope-solid"></app-custom-input>
+      <app-custom-input [control]="signinForm.controls.password" placeholder="Mot de passe" inputIcon="key-solid"
+        inputType="password"></app-custom-input>
       <div class="flex items-center gap-2">
         <input type="checkbox" class="daisy-checkbox daisy-checkbox-primary [--chkfg:white]" />
         <p class="text-[12px] font-bold">Restez connecté</p>
@@ -16,7 +21,8 @@
         <p class="text-[12px] font-bold">Mot de passe oublié ?</p>
       </a>
       <button class="button__primary__purple">Se connecter</button>
-      <p class="text-[12px] font-bold">Nouveau membre ? <a routerLink="/signup"><span class="text-secondary-purple">Inscris toi.</span></a></p>
+      <p class="text-[12px] font-bold">Nouveau membre ? <a routerLink="/signup"><span
+            class="text-secondary-purple">Inscris toi.</span></a></p>
     </form>
   </div>
 </section>
