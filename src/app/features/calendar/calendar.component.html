@@ -1,10 +1,10 @@
-<section class="min-h-screen overflow-hidden py-[12rem] section-p-m">
-  <h1 class="mb-4 font-bold text-xl">Mon planning</h1>
-  <div class="grid grid-cols-5 xl:gap-4 gap-2">
+<section class="overflow-hidden pt-[11rem] section-p-nb">
+  <h1 class="mb-2 font-bold text-xl">Mon planning</h1>
+  <div class="grid grid-cols-5 xl:gap-2 gap-4">
     <div class="col-span-1">
       <app-calendar-filters (filterChange)="onFilterChange($event)"></app-calendar-filters>
     </div>
-    <ejs-schedule class="col-span-4 rounded-xl border border-primary-purple" #scheduleObj width='100%' cssClass='quick-info-template' height='600px' [selectedDate]="selectedDate$" [eventSettings]="eventSettings" (actionComplete)="onActionComplete($event)" (created)="onCreate()" (cellClick)="onCellClick($event)">
+    <ejs-schedule class="col-span-4 rounded-xl border border-primary-purple" #scheduleObj cssClass='quick-info-template' height='660px' [selectedDate]="selectedDate$" [eventSettings]="eventSettings" (actionComplete)="onActionComplete($event)" (created)="onCreate()" (cellClick)="onCellClick($event)">
         <!-- Header -->
             <ng-template #quickInfoTemplatesHeader let-data>
             <div class="quick-info-header">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="quick-content-area">
                   <label for="duration" class="font-bold">Durée en minutes (max 120)</label>
-                  <ejs-textbox #titleObj formControlName="duration" id="duration" placeholder="Durée"></ejs-textbox>               
+                  <ejs-textbox #titleObj formControlName="duration" id="duration" placeholder="Durée"></ejs-textbox>
                 </div>
               </div>
             </div>
