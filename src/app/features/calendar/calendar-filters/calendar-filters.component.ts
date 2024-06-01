@@ -1,10 +1,11 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
 import {Licence} from "src/app/shared/models/licence";
-import {User} from "src/app/shared/models/user";
+import {CreateUser} from "src/app/shared/models/createUser";
 import {UserService} from "src/app/shared/services/user/user.service";
 import {AsyncPipe} from "@angular/common";
 import {LicenceService} from "src/app/shared/services/licence/licence.service";
+import {User} from "src/app/shared/models/user";
 
 @Component({
   selector: 'app-calendar-filters',
@@ -21,10 +22,10 @@ export class CalendarFiltersComponent implements OnInit {
   licences$!: Observable<Licence[]>;
   selectedTeachers$ : string[] = [];
   onlyEmptyLessons$ : boolean = false;
-  
+
 
   @Output() filterChange = new EventEmitter<any>();
-  
+
   constructor(private userService: UserService, private licenceService: LicenceService) {}
 
   ngOnInit() {
@@ -42,7 +43,7 @@ export class CalendarFiltersComponent implements OnInit {
   toggleTeacherSelection(teacherId: string, event: Event) {
     const inputElement = event.target as HTMLInputElement;
     const isChecked = inputElement.checked;
-    
+
     if (isChecked) {
       this.selectedTeachers$.push(teacherId);
     } else {
@@ -57,7 +58,7 @@ export class CalendarFiltersComponent implements OnInit {
   toggleStatusSelection(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     const isChecked = inputElement.checked;
-    
+
     if (isChecked) {
       this.onlyEmptyLessons$ = true;
     } else {

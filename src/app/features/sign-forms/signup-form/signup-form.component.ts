@@ -1,16 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {CustomInputComponent} from "../../../shared/components/custom-input/custom-input.component";
+import {CustomInputComponent} from "src/app/shared/components/custom-input/custom-input.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators, FormsModule} from "@angular/forms";
 import {Router, RouterLink} from "@angular/router";
 import { CommonModule } from "@angular/common";
-import {LicenceService} from "../../../shared/services/licence/licence.service";
-import {Licence} from "../../../shared/models/licence";
+import {LicenceService} from "src/app/shared/services/licence/licence.service";
+import {Licence} from "src/app/shared/models/licence";
 import {Observable} from "rxjs";
-import {DrivingSchoolService} from "../../../shared/services/driving_school/driving-school.service";
-import {DrivingSchool} from "../../../shared/models/driving-school";
-import {UserService} from "../../../shared/services/user/user.service";
-import {User} from "../../../shared/models/user";
-import {CustomSnackbarService} from "../../../shared/components/custom-snackbar/custom-snackbar.service";
+import {UserService} from "src/app/shared/services/user/user.service";
+import {CreateUser} from "src/app/shared/models/createUser";
+import {CustomSnackbarService} from "src/app/shared/components/custom-snackbar/custom-snackbar.service";
+import {FormUtilsService} from "src/app/shared/services/form_utils/form-utils.service";
 
 @Component({
   selector: 'app-signup-form',
@@ -27,20 +26,17 @@ import {CustomSnackbarService} from "../../../shared/components/custom-snackbar/
 })
 export class SignupFormComponent implements OnInit {
   licences$!: Observable<Licence[]>;
-  drivingSchools$! : Observable<DrivingSchool[]>;
 
-  constructor(private customSnackbar: CustomSnackbarService, private router: Router, private licenceService: LicenceService, private drivingSchoolService: DrivingSchoolService, private userService: UserService) {}
+  constructor(private formUtilsService: FormUtilsService, private customSnackbar: CustomSnackbarService, private router: Router, private licenceService: LicenceService, private userService: UserService) {}
 
   ngOnInit() {
     this.getLicences();
-    this.getDrivingSchools();
   }
 
   signupForm = new FormGroup({
     name: new FormControl('', Validators.required),
     firstName: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
-    drivingSchool: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
     passwordConfirmation: new FormControl('', Validators.required),
     licenceType: new FormControl('', Validators.required),
@@ -49,7 +45,7 @@ export class SignupFormComponent implements OnInit {
 
   onSubmitSignup() {
     if (this.signupForm.invalid) {
-      this.markFormGroupDirty(this.signupForm);
+      this.formUtilsService.markFormGroupDirty(this.signupForm);
       this.customSnackbar.show('Veuillez renseigner tous les champs correctement.', 'error');
       return;
     }
@@ -73,13 +69,12 @@ export class SignupFormComponent implements OnInit {
     return this.signupForm.controls.password.value === this.signupForm.controls.passwordConfirmation.value
   }
 
-  private convertFormGroupToUser(form: FormGroup) : User {
+  private convertFormGroupToUser(form: FormGroup) : CreateUser {
     return {
       id: '',
       name: form.value.name,
       firstName: form.value.firstName,
       email: form.value.email,
-      drivingSchool: form.value.drivingSchool,
       password: form.value.password,
       licenceType: parseInt(form.value.licenceType, 10),
       type: form.value.type
@@ -89,20 +84,4 @@ export class SignupFormComponent implements OnInit {
   private getLicences() {
     this.licences$ = this.licenceService.getLicences();
   }
-
-  private getDrivingSchools() {
-    this.drivingSchools$ = this.drivingSchoolService.getDrivingSchools();
-  }
-
-  private markFormGroupDirty(formGroup: FormGroup) {
-    Object.values(formGroup.controls).forEach(control => {
-      control.markAsDirty();
-
-      if (control instanceof FormGroup) {
-        this.markFormGroupDirty(control);
-      }
-    });
-  }
-
-
 }

@@ -60,6 +60,10 @@
   @apply daisy-btn bg-primary-purple hover:shadow-lg hover:opacity-90 text-[16px] hover:bg-secondary-purple rounded-[15px] text-white font-light px-6
 }
 
+.button__primary__white {
+  @apply daisy-btn bg-white text-[16px] hover:bg-secondary-purple hover:text-white rounded-[15px] text-primary-purple font-light px-6
+}
+
 @layer utilities {
   .box__shadow {
     -webkit-box-shadow: 5px 5px 6px -3px rgba(0,0,0,0.5);
