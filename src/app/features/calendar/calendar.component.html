@@ -4,7 +4,7 @@
     <div class="col-span-1">
       <app-calendar-filters (filterChange)="onFilterChange($event)"></app-calendar-filters>
     </div>
-    <ejs-schedule class="col-span-4 rounded-xl border border-primary-purple" #scheduleObj cssClass='quick-info-template' height='660px' [selectedDate]="selectedDate$" [eventSettings]="eventSettings" (actionComplete)="onActionComplete($event)" (created)="onCreate()" (cellClick)="onCellClick($event)">
+    <ejs-schedule class="col-span-4 rounded-xl border border-primary-purple" #scheduleObj cssClass='quick-info-template' height='660px' [selectedDate]="selectedDate$" [eventSettings]="eventSettings" (actionComplete)="onActionComplete($event)" (created)="onCreate()" (cellClick)="onCellClick($event)" (eventClick)="onEventClick($event)">
         <!-- Header -->
             <ng-template #quickInfoTemplatesHeader let-data>
             <div class="quick-info-header">
@@ -38,6 +38,7 @@
             </div>
           </ng-template>
           <ng-template #eventContent let-data="data">
+            @if (user.userType.value==0) {
             <div class="quick-info-content">
               <div class="event-content">
                 <div class="meeting-type-wrap">
@@ -54,6 +55,24 @@
                 </div>
               </div>
             </div>
+          }@else {
+            <div class="quick-info-content" [formGroup]="lessonFormCreation">
+              <div class="e-cell-content">
+                <div class="quick-content-area">
+                  <label for="title" class="font-bold">Titre</label>
+                  <ejs-textbox #titleObj id="title" placeholder="Conduite" formControlName="name"></ejs-textbox>
+                </div>
+                <div class="quick-content-area">
+                  <ejs-datetimepicker id="StartTime" class="e-field" data-name="StartTime" formControlName="start" format="dd/MM/yy HH:mm" #startTime>
+                  </ejs-datetimepicker>
+                </div>
+                <div class="quick-content-area">
+                  <label for="duration" class="font-bold">Durée en minutes (max 120)</label>
+                  <ejs-textbox #titleObj id="duration" formControlName="duration"></ejs-textbox>
+                </div>
+              </div>
+            </div>
+          }
           </ng-template>
           <!-- Footer -->
           <ng-template #quickInfoTemplatesFooter let-data>
@@ -78,10 +97,9 @@
                   <button ejs-button id="quitQueue" [isPrimary]="true" (click)="quitterFileAttente(data.id)">Quitter File d'attente</button>
                 }
               }@else {
-                  <button ejs-button id="editLesson">Modifier</button>
+                  <button ejs-button id="editLesson"(click)="updateLecon(data.id)">Modifier</button>
                   <button ejs-button id="deleteLesson" [isPrimary]="true" (click)="supprimerLecon(data.id)">Supprimer</button>
               }
-
             </div>
           </ng-template>
     </ejs-schedule>

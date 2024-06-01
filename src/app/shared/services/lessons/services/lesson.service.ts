@@ -46,4 +46,8 @@ export class LessonService {
   public deleteLesson(lessonId: number) {
     return this.http.delete(`${environment.api}/Lesson/Delete`, { params: { lessonId: lessonId.toString() } });
   }
+
+  public updateLesson(lessonData:any){
+    return this.http.put(`${environment.api}/Lesson/Update`,lessonData);
+  }
 }

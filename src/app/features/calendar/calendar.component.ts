@@ -79,7 +79,17 @@ export class CalendarComponent{
   public onCellClick(args: any): void {
     const clickedDate: Date = args.startTime;
     this.lessonFormCreation.patchValue({
+      name: '',
       start: clickedDate.toISOString()
+    });
+  }
+
+  public onEventClick(args: any): void {
+    const clickedDate: Date = args.event.startTime;
+    this.lessonFormCreation.patchValue({
+      name: args.event.title,
+      start: clickedDate.toISOString(),
+      duration: parseInt(args.event.duration)
     });
   }
 
@@ -209,5 +219,33 @@ export class CalendarComponent{
     );
   }
 
+  public updateLecon(idLesson: number): void {
+    const formData = this.lessonFormCreation.value;
+    if (formData.start) {
+      //Ici ca bricole parce que l'objet Date force avec son GMT +2
+      const d = new Date(formData.start);
+      const datePart = d.toLocaleDateString('fr-CA'); // Format: YYYY-MM-DD
+      const timePart = d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }); // Format: HH:mm:ss
+      const formattedDateTime = `${datePart}T${timePart}`;
+    
+      formData.start = formattedDateTime;
+
+      const requestBody = {
+        id: idLesson,
+        name: formData.name,
+        start: formData.start,
+        duration: formData.duration
+      }
+
+      this.lessonService.updateLesson(requestBody).subscribe(
+        (response) => {
+          this.customSnackbar.show('Cours mis à jour !', 'success')
+          this.scheduleObj.closeQuickInfoPopup();
+          this.refreshEvents();
+        },
+        (error) => this.customSnackbar.show(error.error, 'error')
+      );
+    }
+  }
 }
 
