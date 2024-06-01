@@ -19,12 +19,14 @@
             <span>Suivi</span>
           </a>
         </div>
+        @if (isUserLoggedIn) {
         <div class="block hover:text-primary-purple hover:underline-offset-[15px] hover:underline relative">
           <a routerLink="/account">
-            <span>Compte</span>
+            <span>{{ userFirstName }}</span>
           </a>
         </div>
-        @if (!isUserLoggedIn) {
+        }
+        @else {
           <div class="block relative">
             <a routerLink="/signin">
               <button class="button__light__purple">

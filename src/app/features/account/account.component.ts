@@ -8,7 +8,7 @@ import {Router, RouterLink} from "@angular/router";
 import {AuthenticationService} from "src/app/shared/services/authentication/authentication.service";
 import {CustomSnackbarService} from "src/app/shared/components/custom-snackbar/custom-snackbar.service";
 import {User} from "src/app/shared/models/user";
-import {FormUtilsService} from "src/app/shared/services/form_utils/form-utils.service";
+import {FormUtilsService} from "../../shared/services/form_utils/form-utils.service";
 
 
 @Component({
