@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {CreateUser} from "../../models/createUser";
+import {CreateUser} from "src/app/shared/models/createUser";
 import {environment} from "src/environments/environment";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {tap} from "rxjs/operators";
 import {User} from "src/app/shared/models/user";
 
@@ -10,8 +10,13 @@ import {User} from "src/app/shared/models/user";
   providedIn: 'root'
 })
 export class UserService {
+  private userSubject: BehaviorSubject<User | null>;
+  public user$: Observable<User | null>;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.userSubject = new BehaviorSubject<User | null>(null);
+    this.user$ = this.userSubject.asObservable();
+  }
 
   createUser(user: CreateUser) : Observable<any> {
     return this.http.post<any>(`${environment.api}/User/Create`, user).pipe(
@@ -24,12 +29,20 @@ export class UserService {
     );
   }
 
-  getUser() : Observable<User> {
-    return this.http.get<any>(`${environment.api}/User/`);
+  getUser(): Observable<User> {
+    return this.http.get<User>(`${environment.api}/User`).pipe(
+      tap(user => {
+        this.userSubject.next(user);
+      })
+    );
   }
 
   updateUser(user: Partial<User>): Observable<any> {
-    return this.http.put(`${environment.api}/User/Update`, user);
+    return this.http.put(`${environment.api}/User/Update`, user).pipe(
+      tap(() => {
+        this.userSubject.next({ ...this.userSubject.value, ...user } as User);
+      })
+    );
   }
 
   getTeachers() : Observable<User[]> {

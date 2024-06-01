@@ -1,7 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {RouterLink} from "@angular/router";
-import {AuthenticationService} from "src/app/shared/services/authentication/authentication.service";
-import {Subscription} from "rxjs";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { RouterLink } from "@angular/router";
+import { AuthenticationService } from "src/app/shared/services/authentication/authentication.service";
+import { Subscription } from "rxjs";
+import { UserService } from "src/app/shared/services/user/user.service";
 
 @Component({
   selector: 'app-header',
@@ -10,23 +11,40 @@ import {Subscription} from "rxjs";
     RouterLink
   ],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   isUserLoggedIn: boolean = false;
+  userFirstName!: string;
   private authSubscription!: Subscription;
+  private userSubscription!: Subscription;
 
-  constructor(private authService: AuthenticationService) {}
+  constructor(private userService: UserService, private authService: AuthenticationService) {}
 
   ngOnInit(): void {
     this.authSubscription = this.authService.isAuthenticated$.subscribe(isAuthenticated => {
       this.isUserLoggedIn = isAuthenticated;
+    });
+
+    if (this.isUserLoggedIn) {
+      this.loadUserDetails();
+    }
+  }
+
+  private loadUserDetails(): void {
+    this.userSubscription = this.userService.user$.subscribe(user => {
+      if (user) {
+        this.userFirstName = user.firstName;
+      }
     });
   }
 
   ngOnDestroy(): void {
     if (this.authSubscription) {
       this.authSubscription.unsubscribe();
+    }
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
     }
   }
 }
