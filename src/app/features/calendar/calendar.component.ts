@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ScheduleComponent, MonthService, DayService, WeekService, WorkWeekService, AgendaService, MonthAgendaService, EventSettingsModel, ScheduleModule, ActionEventArgs } from '@syncfusion/ej2-angular-schedule';
 import { Internationalization } from '@syncfusion/ej2-base';
 import { CommonModule  } from '@angular/common';
@@ -6,12 +6,14 @@ import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
 import { LessonService } from 'src/app/shared/services/lessons/services/lesson.service';
 import {CalendarFiltersComponent} from "src/app/features/calendar/calendar-filters/calendar-filters.component";
 import { Lesson } from 'src/app/shared/models/lesson';
-import { Observable, map } from 'rxjs';
+import { Observable, Subscription, map } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateTimePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomSnackbarService } from 'src/app/shared/components/custom-snackbar/custom-snackbar.service';
+import { UserService } from 'src/app/shared/services/user/user.service';
+import { User } from 'src/app/shared/models/user';
 
 
 @Component({
@@ -29,6 +31,8 @@ export class CalendarComponent{
   lessons$!: Observable<Lesson[]>;
   selectedTeachers$ : string[] = [];
   onlyEmptyLessons$ : boolean = false;
+  user!: User;
+  userSubscription!: Subscription;
 
   @ViewChild('scheduleObj') public scheduleObj!: ScheduleComponent;
 
@@ -42,7 +46,7 @@ export class CalendarComponent{
     },
    };
 
-  constructor(private lessonService: LessonService, private customSnackbar: CustomSnackbarService) {
+  constructor(private lessonService: LessonService, private customSnackbar: CustomSnackbarService, private userService: UserService) {
   }
 
   lessonFormCreation = new FormGroup({
@@ -53,8 +57,23 @@ export class CalendarComponent{
   
   
   public onCreate(): void {
+    this.initializeCalendar();
     this.getLessons();
     this.refreshEvents();
+  }
+
+  private initializeCalendar() {
+
+      this.userSubscription = this.userService.getUser().subscribe(user => {
+        this.user = user;
+        if (this.user.userType.value === 0) {
+          this.scheduleObj.eventSettings.allowAdding = false;
+          this.scheduleObj.eventSettings.allowEditing = false;
+          this.scheduleObj.eventSettings.allowDeleting = false;
+        }
+        this.getLessons();
+        this.refreshEvents();
+      });    
   }
 
   public onCellClick(args: any): void {
