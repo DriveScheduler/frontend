@@ -1,1 +1,30 @@
-<p>account works!</p>
+
+<ng-container *ngIf="user">
+  <section class="relative flex min-h-screen flex-col justify-center overflow-hidden">
+    <div class="relative bg-white min-w-[700px] max-w-screen-xl py-8 shadow-xl ring-1 ring-gray-900/5 mx-auto rounded-lg px-10">
+      <div class="flex flex-col gap-8">
+        <div class="flex items-center justify-center">
+          <img src="assets/images/user_icon_purple.svg" class="scale-75">
+          <div class="flex flex-col">
+            <p> {{user.firstName}} {{ user.name }}</p>
+            <p> {{ user.userType.label }}</p>
+            <p class="text-secondary-purple"><button (click)="logout()"> Déconnexion</button></p>
+          </div>
+        </div>
+        <form class="flex flex-col gap-8 items-center" [formGroup]="updateForm" (ngSubmit)="onSubmitUpdate()">
+          <div class="grid grid-cols-2 gap-4">
+            <app-custom-input class="col-span-1" [control]="updateForm.controls.firstName" [defaultValue]="user.firstName" inputIcon="user-solid"></app-custom-input>
+            <app-custom-input class="col-span-1" [control]="updateForm.controls.name" [defaultValue]="user.name" inputIcon="user-solid"></app-custom-input>
+            <app-custom-input class="col-span-2" [control]="updateForm.controls.email" [defaultValue]="user.email" inputIcon="envelope-solid"></app-custom-input>
+          </div>
+          <div class="flex gap-4">
+            <button type="button" class="button__primary__white" (click)="restoreForm()">Annuler</button>
+            <button type="submit" class="button__primary__purple">Apppliquer les modifications</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</ng-container>
+

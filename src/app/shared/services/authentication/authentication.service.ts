@@ -49,24 +49,6 @@ export class AuthenticationService {
     }
   }
 
-  getUserType(): string {
-    const token = this.getToken();
-    if (token) {
-      const decoded: any = jwtDecode(token);
-      return decoded.role;
-    }
-    return '';
-  }
-
-  getUserId(): string {
-    const token = this.getToken();
-    if (token) {
-      const decoded: any = jwtDecode(token);
-      return decoded.id;
-    }
-    return '';
-  }
-
   logout(): void {
     localStorage.removeItem('token');
     this.isAuthenticatedSubject.next(false);

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DrivingSchoolService } from './driving-school.service';
+import { FormUtilsService } from './form-utils.service';
 
-describe('DrivingSchoolService', () => {
-  let service: DrivingSchoolService;
+describe('FormUtilsService', () => {
+  let service: FormUtilsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DrivingSchoolService);
+    service = TestBed.inject(FormUtilsService);
   });
 
   it('should be created', () => {

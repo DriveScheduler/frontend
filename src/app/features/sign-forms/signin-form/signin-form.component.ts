@@ -4,6 +4,7 @@ import {CustomInputComponent} from "src/app/shared/components/custom-input/custo
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {AuthenticationService} from 'src/app/shared/services/authentication/authentication.service';
 import { CustomSnackbarService } from "src/app/shared/components/custom-snackbar/custom-snackbar.service";
+import {FormUtilsService} from "src/app/shared/services/form_utils/form-utils.service";
 
 @Component({
   selector: 'app-signin-form',
@@ -17,7 +18,7 @@ import { CustomSnackbarService } from "src/app/shared/components/custom-snackbar
   styleUrl: './signin-form.component.css'
 })
 export class SigninFormComponent {
-  constructor(private authenticationService: AuthenticationService, private customSnackbar: CustomSnackbarService, private router: Router) {}
+  constructor(private formUtilsService: FormUtilsService, private authenticationService: AuthenticationService, private customSnackbar: CustomSnackbarService, private router: Router) {}
 
   signinForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -26,7 +27,7 @@ export class SigninFormComponent {
 
   onSubmitSignin() {
     if (this.signinForm.invalid) {
-      this.markFormGroupDirty(this.signinForm);
+      this.formUtilsService.markFormGroupDirty(this.signinForm);
       this.customSnackbar.show('Veuillez renseigner tous les champs correctement.', 'error');
       return;
     }
@@ -43,15 +44,5 @@ export class SigninFormComponent {
         this.customSnackbar.show(error.error, 'error')
       }
     );
-  }
-
-  private markFormGroupDirty(formGroup: FormGroup) {
-    Object.values(formGroup.controls).forEach(control => {
-      control.markAsDirty();
-
-      if (control instanceof FormGroup) {
-        this.markFormGroupDirty(control);
-      }
-    });
   }
 }

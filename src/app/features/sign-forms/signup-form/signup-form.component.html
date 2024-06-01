@@ -28,16 +28,6 @@
         <app-custom-input class="grid sm:col-span-1 col-span-2" [control]="signupForm.controls.firstName" placeholder="Prénom" inputIcon="user-solid"></app-custom-input>
         <app-custom-input class="grid sm:col-span-1 col-span-2" [control]="signupForm.controls.name" placeholder="Nom" inputIcon="user-solid"></app-custom-input>
         <app-custom-input class="grid col-span-2" [control]="signupForm.controls.email" placeholder="Email" inputIcon="envelope-solid"></app-custom-input>
-        <select class="duration-300 hover:shadow-md focus:box__shadow daisy-select text-[16px] rounded-[20px] bg-gray-100 placeholder-opacity-60 focus:border-primary-purple focus:outline-none col-span-2 custom-select" formControlName="drivingSchool"
-                [ngClass]="{
-                      'border-rose-500': signupForm.controls.drivingSchool.invalid && signupForm.controls.drivingSchool.dirty
-                      }"
-                required>
-          <option value="" disabled>Auto-école</option>
-          @for (drivingSchool of (drivingSchools$ | async); track drivingSchool.name) {
-            <option>{{drivingSchool.name}}</option>
-          }
-        </select>
         <app-custom-input class="grid col-span-2" [control]="signupForm.controls.password" placeholder="Mot de passe" inputIcon="key-solid" inputType="password"></app-custom-input>
         <app-custom-input class="grid col-span-2" [control]="signupForm.controls.passwordConfirmation" placeholder="Confirmer le mot de passe" inputIcon="key-solid" inputType="password"></app-custom-input>
         <select class="duration-300 hover:shadow-md focus:box__shadow daisy-select text-[16px] rounded-[20px] bg-gray-100 placeholder-opacity-60 focus:border-primary-purple focus:outline-none col-span-2 custom-select" formControlName="licenceType"
