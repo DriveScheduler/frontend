@@ -59,7 +59,9 @@ export class SignupFormComponent implements OnInit {
     this.userService.createUser(user).subscribe(
       () => {
         this.customSnackbar.show('Utilisateur créé !', 'success')
-        this.router.navigateByUrl('/calendar');
+        this.router.navigateByUrl('/calendar').then(() => {
+          window.location.reload();
+        });
       },
       (error) => this.customSnackbar.show(error.error, 'error')
     )
