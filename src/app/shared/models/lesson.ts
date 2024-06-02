@@ -11,4 +11,5 @@ export interface Lesson {
     duration: string;
     teacher: string;
     vehicle: string;
+    waitingList: number;
 }

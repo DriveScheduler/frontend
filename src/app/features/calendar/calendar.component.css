@@ -124,3 +124,13 @@
       border-radius: 12px;
   }
 
+.quick-info-content .flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.quick-info-content .flex-item {
+  flex: 1;
+}

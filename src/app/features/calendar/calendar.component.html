@@ -70,6 +70,17 @@
                   <label for="duration" class="font-bold">Durée en minutes (max 120)</label>
                   <ejs-textbox #titleObj id="duration" formControlName="duration"></ejs-textbox>
                 </div>
+                <div class="quick-content-area flex-container">
+                  <div class="flex-item">
+                    <label for="vehicle" class="font-bold">Véhicule : {{data.vehicle}}</label>
+                  </div>
+                  <div class="flex-item">
+                    <label for="waitingList" class="font-bold">File d'attente : {{data.waitingList}}</label>
+                  </div>
+                </div>
+                <div class="quick-content-area">
+                  <label for="student" class="font-bold">Elève : @if(data.student!=null){ {{data.student.firstName}} {{data.student.name}}  }</label>
+                </div>
               </div>
             </div>
           }
