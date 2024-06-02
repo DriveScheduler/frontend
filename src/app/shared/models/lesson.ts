@@ -5,11 +5,12 @@ export interface Lesson {
     };
     id: number;
     title: string;
-    status: string;
     startTime: Date;
     endTime: Date;
     duration: string;
     teacher: string;
     vehicle: string;
     waitingList: number;
+    color: string;
+    cssClass: string | undefined;
 }

@@ -4,11 +4,32 @@
     <div class="col-span-1">
       <app-calendar-filters (filterChange)="onFilterChange($event)"></app-calendar-filters>
     </div>
-    <ejs-schedule class="col-span-4 rounded-xl border border-primary-purple" #scheduleObj cssClass='quick-info-template' height='660px' [selectedDate]="selectedDate$" [eventSettings]="eventSettings" (actionComplete)="onActionComplete($event)" (created)="onCreate()" (cellClick)="onCellClick($event)" (eventClick)="onEventClick($event)" (popupOpen)="onPopupOpen($event)">
-        <!-- Header -->
+    <ejs-schedule class="col-span-4 rounded-xl border border-primary-purple" #scheduleObj cssClass='quick-info-template' height='660px' [selectedDate]="selectedDate$" [eventSettings]="eventSettings" (actionComplete)="onActionComplete($event)" (created)="onCreate()" (cellClick)="onCellClick($event)" (eventClick)="onEventClick($event)" (popupOpen)="onPopupOpen($event)" (eventRendered)="applyCategoryColor($event)">  
+      <!-- <e-views>
+        <e-view option="Day"></e-view>
+        <e-view option="Week"></e-view>
+        <e-view option="WorkWeek">
+          <ng-template #eventTemplate let-data>
+            <div class='template-wrap' [style.background]="data.SecondaryColor">
+              <div class="font-bold" [style.background]="data.PrimaryColor">{{data.title}}</div>
+              <div class="time" [style.background]="data.PrimaryColor">Time: {{(data.startTime)}} -
+                {{(data.endTime)}}</div>
+              <div class="location" [style.background]="data.PrimaryColor">Location: {{data.Location}}</div>
+              <div class="image flex items-center justify-center h-full">
+                <img src="assets/images/key-solid.svg" alt="test" class="event-icon w-5 h-5 object-contain" />
+              </div>
+            <div class="description">{{data.Description}}</div>
+              <div class="footer" [style.background]="data.PrimaryColor"></div> 
+            </div>
+          </ng-template>
+        </e-view>
+        <e-view option="Month"></e-view>
+        <e-view option="Agenda"></e-view>
+      </e-views> -->
+      <!-- Header -->
             <ng-template #quickInfoTemplatesHeader let-data>
             <div class="quick-info-header">
-              <div class="quick-info-header-content" [ngStyle]="getHeaderStyles()">
+              <div class="quick-info-header-content" [ngStyle]="getHeaderStyles(data)">
                 <div class="quick-info-title">{{getHeaderTitle(data)}}</div>
                 <div class="duration-text">{{getHeaderDetails(data)}}</div>
               </div>

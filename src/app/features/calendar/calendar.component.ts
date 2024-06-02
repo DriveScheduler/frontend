@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ScheduleComponent, MonthService, DayService, WorkWeekService, AgendaService, MonthAgendaService, EventSettingsModel, ScheduleModule, ActionEventArgs, PopupOpenEventArgs } from '@syncfusion/ej2-angular-schedule';
+import { ScheduleComponent, MonthService, DayService, WorkWeekService, AgendaService, MonthAgendaService, EventSettingsModel, ScheduleModule, ActionEventArgs, PopupOpenEventArgs, EventRenderedArgs, ResourcesModel, WeekService } from '@syncfusion/ej2-angular-schedule';
 import { Internationalization } from '@syncfusion/ej2-base';
 import { CommonModule  } from '@angular/common';
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
@@ -102,8 +102,12 @@ export class CalendarComponent{
     this.refreshEvents();
   }
 
-  public getHeaderStyles(): Record<string, any> {
-      return { background: '#475387', color: '#FFFFFF' };
+  public getHeaderStyles(data: Record<string, any>): Record<string, any> {
+    if (data.elementType === 'cell') {
+      return { 'align-items': 'center', color: '#919191' };
+    } else {
+      return { background: data.color, color: '#FFFFFF' };
+    }  
   }
 
   public getHeaderTitle(data: Record<string, any>): string {
@@ -137,7 +141,6 @@ export class CalendarComponent{
               console.error('Erreur lors de la récupération des leçons', error);
             }
           );
-          this.scheduleObj.refreshEvents();
   }
 
   public onPopupOpen(args: PopupOpenEventArgs): void {
@@ -146,13 +149,39 @@ export class CalendarComponent{
     }
   }
 
+  applyCategoryColor(args: EventRenderedArgs): void {
+      args.element.style.backgroundColor = args.data.color;      
+  }
 // ---------------------- CRUD ----------------------
   private getLessons(){
     const currentViewDates = this.scheduleObj.getCurrentViewDates();
     const startDate = currentViewDates[0];
     const endDate = currentViewDates[currentViewDates.length - 1];
     
-    this.lessons$ = this.lessonService.getLessons(startDate, endDate, this.onlyEmptyLessons$, this.selectedTeachers$);
+    this.lessons$ = this.lessonService.getLessons(startDate, endDate, this.onlyEmptyLessons$, this.selectedTeachers$)
+      .pipe(
+        map((lessons: Lesson[]) => {
+          return lessons.map((lesson) => {
+            switch (lesson.state.value) {
+              case 0:
+                lesson.color = '#1E90FF';  // Libre
+                break;
+              case 1:
+                lesson.color = '#ee1010';  // Réservé par un autre élève
+                break;
+              case 2:
+                lesson.color = '#6B8E23';  // Réservé
+                break;
+              case 3:
+                lesson.color = '#df6d14';  // En file d'attente
+                break;
+              default:
+                lesson.color = '#000000';  // Default color if needed
+            }
+            return lesson;
+          });
+        })
+      );
   }
 
   public reserverCreneau(idLesson: number): void {
