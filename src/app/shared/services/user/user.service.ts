@@ -37,6 +37,10 @@ export class UserService {
     );
   }
 
+  getUserDashboard() : Observable<any> {
+    return this.http.get<any>(`${environment.api}/User/Dashboard`);
+  }
+
   updateUser(user: Partial<User>): Observable<any> {
     return this.http.put(`${environment.api}/User/Update`, user).pipe(
       tap(() => {
