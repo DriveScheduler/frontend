@@ -23,16 +23,14 @@
             <div class="quick-info-content" [formGroup]="lessonFormCreation">
               <div class="e-cell-content">
                 <div class="quick-content-area">
-                  <label for="title" class="font-bold">Titre</label>
-                  <ejs-textbox #titleObj formControlName="name" id="title" placeholder="Conduite"></ejs-textbox>
+                  <ejs-textbox #titleObj formControlName="name" id="title" placeholder="Titre" floatLabelType="Auto"></ejs-textbox>
                 </div>
                 <div class="quick-content-area">
-                  <ejs-datetimepicker formControlName="start" id="StartTime" class="e-field" data-name="StartTime" format="dd/MM/yy HH:mm" #startTime>
+                  <ejs-datetimepicker formControlName="start" id="StartTime" class="e-field" data-name="StartTime" placeholder="Date et heure" floatLabelType="Auto" format="dd/MM/yy HH:mm" #startTime>
                   </ejs-datetimepicker>
                 </div>
                 <div class="quick-content-area">
-                  <label for="duration" class="font-bold">Durée en minutes (max 120)</label>
-                  <ejs-textbox #titleObj formControlName="duration" id="duration" placeholder="Durée"></ejs-textbox>
+                  <ejs-textbox #titleObj formControlName="duration" id="duration" placeholder="Durée en minutes (max 120)" floatLabelType="Auto"></ejs-textbox>
                 </div>
               </div>
             </div>
@@ -41,17 +39,21 @@
             @if (user.userType.value==0) {
             <div class="quick-info-content">
               <div class="event-content">
-                <div class="meeting-type-wrap">
-                  <label>Subject</label>:
+                <div class="meeting-type-wrap font-bold">
+                  <label>Titre</label>:
                   <span>{{data.title}}</span>
                 </div>
-                <div class="meeting-subject-wrap">
+                <div class="meeting-subject-wrap font-bold">
                   <label>Moniteur</label>:
                   <span>{{data.teacher}}</span>
                 </div>
-                <div class="notes-wrap">
+                <div class="notes-wrap font-bold">
                   <label>Véhicule</label>:
                   <span>{{data.vehicle}}</span>
+                </div>
+                <div class="notes-wrap font-bold">
+                  <label>File d'attente</label>:
+                  <span>{{data.waitingList}}</span>
                 </div>
               </div>
             </div>
@@ -59,16 +61,14 @@
             <div class="quick-info-content" [formGroup]="lessonFormCreation">
               <div class="e-cell-content">
                 <div class="quick-content-area">
-                  <label for="title" class="font-bold">Titre</label>
-                  <ejs-textbox #titleObj id="title" placeholder="Conduite" formControlName="name"></ejs-textbox>
+                  <ejs-textbox #titleObj id="title" placeholder="Conduite" formControlName="name" placeholder="Titre" floatLabelType="Auto"></ejs-textbox>
                 </div>
                 <div class="quick-content-area">
-                  <ejs-datetimepicker id="StartTime" class="e-field" data-name="StartTime" formControlName="start" format="dd/MM/yy HH:mm" #startTime>
+                  <ejs-datetimepicker id="StartTime" class="e-field" data-name="StartTime" formControlName="start" placeholder="Date et heure"  floatLabelType="Auto" format="dd/MM/yy HH:mm" #startTime>
                   </ejs-datetimepicker>
                 </div>
                 <div class="quick-content-area">
-                  <label for="duration" class="font-bold">Durée en minutes (max 120)</label>
-                  <ejs-textbox #titleObj id="duration" formControlName="duration"></ejs-textbox>
+                  <ejs-textbox #titleObj id="duration" formControlName="duration" placeholder="Durée" floatLabelType="Auto"></ejs-textbox>
                 </div>
                 <div class="quick-content-area flex-container">
                   <div class="flex-item">
@@ -79,7 +79,7 @@
                   </div>
                 </div>
                 <div class="quick-content-area">
-                  <label for="student" class="font-bold">Elève : @if(data.student!=null){ {{data.student.firstName}} {{data.student.name}}  }</label>
+                  <label for="student" class="font-bold">Élève : @if(data.student!=null){ {{data.student.firstName}} {{data.student.name}}  }</label>
                 </div>
               </div>
             </div>
