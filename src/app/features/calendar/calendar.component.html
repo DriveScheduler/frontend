@@ -4,7 +4,7 @@
     <div class="col-span-1">
       <app-calendar-filters (filterChange)="onFilterChange($event)"></app-calendar-filters>
     </div>
-    <ejs-schedule class="col-span-4 rounded-xl border border-primary-purple" #scheduleObj cssClass='quick-info-template' height='660px' [selectedDate]="selectedDate$" [eventSettings]="eventSettings" (actionComplete)="onActionComplete($event)" (created)="onCreate()" (cellClick)="onCellClick($event)" (eventClick)="onEventClick($event)">
+    <ejs-schedule class="col-span-4 rounded-xl border border-primary-purple" #scheduleObj cssClass='quick-info-template' height='660px' [selectedDate]="selectedDate$" [eventSettings]="eventSettings" (actionComplete)="onActionComplete($event)" (created)="onCreate()" (cellClick)="onCellClick($event)" (eventClick)="onEventClick($event)" (popupOpen)="onPopupOpen($event)">
         <!-- Header -->
             <ng-template #quickInfoTemplatesHeader let-data>
             <div class="quick-info-header">

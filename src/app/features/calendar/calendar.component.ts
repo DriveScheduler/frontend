@@ -140,6 +140,12 @@ export class CalendarComponent{
           this.scheduleObj.refreshEvents();
   }
 
+  public onPopupOpen(args: PopupOpenEventArgs): void {
+    if (args.type === 'Editor') {
+      args.cancel = true;
+    }
+  }
+
 // ---------------------- CRUD ----------------------
   private getLessons(){
     const currentViewDates = this.scheduleObj.getCurrentViewDates();
