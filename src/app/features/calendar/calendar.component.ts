@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ScheduleComponent, MonthService, DayService, WeekService, WorkWeekService, AgendaService, MonthAgendaService, EventSettingsModel, ScheduleModule, ActionEventArgs } from '@syncfusion/ej2-angular-schedule';
+import { ScheduleComponent, MonthService, DayService, WorkWeekService, AgendaService, MonthAgendaService, EventSettingsModel, ScheduleModule, ActionEventArgs, PopupOpenEventArgs } from '@syncfusion/ej2-angular-schedule';
 import { Internationalization } from '@syncfusion/ej2-base';
 import { CommonModule  } from '@angular/common';
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
@@ -20,7 +20,7 @@ import { User } from 'src/app/shared/models/user';
   selector: 'app-calendar',
   standalone: true,
   imports: [ScheduleModule, CommonModule, ButtonModule, CalendarFiltersComponent,DateTimePickerModule, TextBoxModule, ReactiveFormsModule],
-  providers: [DayService, WeekService, WorkWeekService, MonthService, AgendaService, MonthAgendaService],
+  providers: [DayService, WorkWeekService, MonthService, AgendaService, MonthAgendaService],
   encapsulation: ViewEncapsulation.None,
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.css'
@@ -63,17 +63,19 @@ export class CalendarComponent{
   }
 
   private initializeCalendar() {
-
-      this.userSubscription = this.userService.getUser().subscribe(user => {
-        this.user = user;
-        if (this.user.userType.value === 0) {
-          this.scheduleObj.eventSettings.allowAdding = false;
-          this.scheduleObj.eventSettings.allowEditing = false;
-          this.scheduleObj.eventSettings.allowDeleting = false;
-        }
-        this.getLessons();
-        this.refreshEvents();
-      });    
+    this.scheduleObj.currentView = 'WorkWeek';
+    this.scheduleObj.views = ['Day', 'WorkWeek', 'Month', 'Agenda'];
+    this.userSubscription = this.userService.getUser().subscribe(user => {
+      
+      this.user = user;
+      if (this.user.userType.value === 0) {
+        this.scheduleObj.eventSettings.allowAdding = false;
+        this.scheduleObj.eventSettings.allowEditing = false;
+        this.scheduleObj.eventSettings.allowDeleting = false;
+      }
+      this.getLessons();
+      this.refreshEvents();
+    });    
   }
 
   public onCellClick(args: any): void {
@@ -138,6 +140,7 @@ export class CalendarComponent{
           this.scheduleObj.refreshEvents();
   }
 
+// ---------------------- CRUD ----------------------
   private getLessons(){
     const currentViewDates = this.scheduleObj.getCurrentViewDates();
     const startDate = currentViewDates[0];
