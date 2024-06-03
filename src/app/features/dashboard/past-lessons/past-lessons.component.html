@@ -1,5 +1,11 @@
 <div class="flex flex-col gap-6">
   <div class="flex flex-wrap gap-5">
-    <!-- boucle sur les cours passés -->
+    <div class="flex flex-wrap gap-4">
+      @if (pastLessons?.lessons) {
+        @for (lesson of pastLessons?.lessons; track lesson.id) {
+          <app-lesson-card [lesson]="lesson" [past]="true"></app-lesson-card>
+        }
+      }
+    </div>
   </div>
 </div>

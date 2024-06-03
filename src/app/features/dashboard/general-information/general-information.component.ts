@@ -28,7 +28,6 @@ export class GeneralInformationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.generationInformationSubscription = this.generalInformation$.subscribe(data => {
       this.generalInformation = data;
-      console.log(this.generalInformation);
     });
   }
 
