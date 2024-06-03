@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {User} from "src/app/shared/models/user";
 
 @Component({
   selector: 'app-teacher-card',
@@ -10,6 +11,6 @@ import {Component, Input} from '@angular/core';
 export class TeacherCardComponent {
 
   @Input() favoriteTeacherTimeSpent!: number;
-  @Input() favoriteTeacher!: string;
+  @Input() favoriteTeacher!: User;
 
 }
