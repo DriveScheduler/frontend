@@ -1,15 +1,23 @@
 <article class="flex flex-col gap-4">
   <div class="flex flex-col gap-2">
-    <h1 class="font-semibold text-2xl">Ma prochaine leçon</h1>
+    <h1 class="text-2xl">Ma prochaine leçon</h1>
+    @if (generalInformation && generalInformation.nextLesson) {
+      <app-lesson-card [lesson]="generalInformation.nextLesson"></app-lesson-card>
+    }
   </div>
   <div class="flex flex-col gap-2">
-    <h1 class="font-semibold text-2xl">Ma dernière leçon</h1>
+    <h1 class="text-2xl">Ma dernière leçon</h1>
+    @if (generalInformation && generalInformation.lastLesson) {
+      <app-lesson-card [lesson]="generalInformation.lastLesson"></app-lesson-card>
+    }
   </div>
   <div class="flex flex-col gap-2">
-    <h1 class="font-semibold text-2xl">Mon moniteur préféré</h1>
+    <h1 class="text-2xl">Mon moniteur préféré</h1>
+    <app-teacher-card></app-teacher-card>
   </div>
   <div class="flex flex-col gap-2">
-    <h1 class="font-semibold text-2xl">Mes chiffres</h1>
+    <h1 class="text-2xl">Mes chiffres</h1>
+    <app-numbers-card></app-numbers-card>
   </div>
 </article>
 

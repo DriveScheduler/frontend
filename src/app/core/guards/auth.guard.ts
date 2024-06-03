@@ -22,7 +22,7 @@ export const AuthGuardAdministration = () => {
 
   if (token && authService.isTokenValid(token)) {
     const decodedToken : any = jwtDecode(token);
-    if (decodedToken.Role == 3) {
+    if (decodedToken.Role == 2) {
       return true;
     }
   }

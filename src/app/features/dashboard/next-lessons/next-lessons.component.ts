@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {LessonCardComponent} from "src/app/shared/components/lesson-card/lesson-card.component";
+import {Observable} from "rxjs";
+import {Lesson} from "src/app/shared/models/lesson";
 
 @Component({
   selector: 'app-next-lessons',
@@ -11,5 +13,7 @@ import {LessonCardComponent} from "src/app/shared/components/lesson-card/lesson-
   styleUrl: './next-lessons.component.css'
 })
 export class NextLessonsComponent {
+
+  @Input() nextLessons$!: Observable<Lesson[]>;
 
 }

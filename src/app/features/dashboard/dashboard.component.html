@@ -1,13 +1,15 @@
 <section class="overflow-hidden pt-[11rem] section-p-nb min-h-screen">
-  <div class="grid grid-cols-5 xl:gap-2 gap-4">
-    <div class="col-span-1">
-      <div class="bg-white max-w-screen-xl shadow-xl ring-1 ring-gray-900/5 mx-auto rounded-lg flex flex-col items-center px-4 py-4">
+  <div class="grid grid-cols-8 gap-8">
+    <div class="col-span-2">
+      <div class=" max-w-screen-xl shadow-xl ring-1 ring-gray-900/5 mx-auto rounded-lg flex flex-col items-center px-4 py-4">
         <div class="flex items-center justify-center">
           <img src="assets/images/user_icon_purple.svg" class="scale-75">
           <div class="flex flex-col">
-            <p> {{ user?.firstName }}</p>
-            <p> {{ user?.userType?.label }}</p>
-            <p> {{ user?.licenceType?.label }}</p>
+            @if (user) {
+              <p> {{ user!.firstName }}</p>
+              <p> {{ user!.userType.label }}</p>
+              <p> {{ user!.licenceType.label }}</p>
+            }
           </div>
         </div>
         <div class="daisy-divider daisy-divider-primary"></div>
@@ -30,17 +32,17 @@
         </ul>
       </div>
     </div>
-    <div class="col-span-4">
-      <div class="max-w-screen-xl mx-auto px-4 py-4">
+    <div class="col-span-6">
+      <div class="px-4 py-4  mb-8">
         <ng-container [ngSwitch]="activeIndex">
           <div *ngSwitchCase="0">
-            <app-general-information></app-general-information>
+            <app-general-information [generalInformation$]="generalInformation$"></app-general-information>
           </div>
           <div *ngSwitchCase="1">
-            <app-next-lessons></app-next-lessons>
+            <app-next-lessons [nextLessons$]="nextLessons$"></app-next-lessons>
           </div>
           <div *ngSwitchCase="2">
-            <app-past-lessons></app-past-lessons>
+            <app-past-lessons [pastLessons$]="pastLessons$"></app-past-lessons>
           </div>
         </ng-container>
       </div>

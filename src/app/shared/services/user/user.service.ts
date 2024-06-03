@@ -5,6 +5,8 @@ import {environment} from "src/environments/environment";
 import {BehaviorSubject, Observable} from "rxjs";
 import {tap} from "rxjs/operators";
 import {User} from "src/app/shared/models/user";
+import {Lesson} from "src/app/shared/models/lesson";
+import {GeneralInformation} from "src/app/shared/models/dashboard/generalIformation";
 
 @Injectable({
   providedIn: 'root'
@@ -37,8 +39,16 @@ export class UserService {
     );
   }
 
-  getUserDashboard() : Observable<any> {
+  getUserDashboard() : Observable<GeneralInformation> {
     return this.http.get<any>(`${environment.api}/User/Dashboard`);
+  }
+
+  getUserNextLessons() : Observable<Lesson[]> {
+    return this.http.get<Lesson[]>(`${environment.api}/User/Planning`);
+  }
+
+  getUserPastLessons() : Observable<Lesson[]> {
+    return this.http.get<Lesson[]>(`${environment.api}/User/History`);
   }
 
   updateUser(user: Partial<User>): Observable<any> {
@@ -52,4 +62,6 @@ export class UserService {
   getTeachers() : Observable<User[]> {
     return this.http.get<User[]>(`${environment.api}/User/Teachers`);
   }
+
+
 }

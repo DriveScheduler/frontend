@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UserService} from "src/app/shared/services/user/user.service";
-import {Subscription} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {User} from "src/app/shared/models/user";
 import {CommonModule} from "@angular/common";
 import {LessonCardComponent} from "src/app/shared/components/lesson-card/lesson-card.component";
@@ -9,6 +9,8 @@ import {
 } from "src/app/features/dashboard/general-information/general-information.component";
 import {NextLessonsComponent} from "src/app/features/dashboard/next-lessons/next-lessons.component";
 import {PastLessonsComponent} from "src/app/features/dashboard/past-lessons/past-lessons.component";
+import {GeneralInformation} from "src/app/shared/models/dashboard/generalIformation";
+import {Lesson} from "src/app/shared/models/lesson";
 
 @Component({
   selector: 'app-dashboard',
@@ -22,11 +24,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
   userSubscription!: Subscription;
   activeIndex: number = 0;
 
+  generalInformation$! : Observable<GeneralInformation>;
+  nextLessons$!: Observable<Lesson[]>;
+  pastLessons$!: Observable<Lesson[]>;
+
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.getUser();
-    this.getUserDashboard();
+    this.getUserGeneralInformation();
+    this.getUserNextLessons();
+    this.getUserPastLessons();
   }
 
   getUser() {
@@ -35,10 +43,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  getUserDashboard() {
-    this.userService.getUserDashboard().subscribe(data => {
-      console.log(data);
-    });
+  getUserGeneralInformation() {
+    this.generalInformation$ = this.userService.getUserDashboard()
+  }
+
+  getUserNextLessons() {
+    this.nextLessons$ = this.userService.getUserNextLessons();
+  }
+
+  getUserPastLessons() {
+    this.pastLessons$ = this.userService.getUserPastLessons();
   }
 
   setActive(index: number) {

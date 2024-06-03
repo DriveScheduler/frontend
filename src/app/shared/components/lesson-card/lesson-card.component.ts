@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Lesson} from "src/app/shared/models/lesson";
 
 @Component({
   selector: 'app-lesson-card',
@@ -8,5 +9,7 @@ import { Component } from '@angular/core';
   styleUrl: './lesson-card.component.css'
 })
 export class LessonCardComponent {
+
+  @Input() lesson!: Lesson;
 
 }
