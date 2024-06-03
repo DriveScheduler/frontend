@@ -30,4 +30,14 @@ export class NextLessonsComponent implements OnInit, OnDestroy{
       this.nextLessonsSubscription.unsubscribe();
     }
   }
+
+  onLessonRemoved($event: number) {
+    if (this.nextLessons) {
+      this.nextLessons.tomorrow = this.nextLessons.tomorrow.filter(lesson => lesson.id !== $event);
+      this.nextLessons.thisWeek = this.nextLessons.thisWeek.filter(lesson => lesson.id !== $event);
+      this.nextLessons.thisMonth = this.nextLessons.thisMonth.filter(lesson => lesson.id !== $event);
+      this.nextLessons.nextMonths = this.nextLessons.nextMonths.filter(lesson => lesson.id !== $event);
+      this.nextLessons.today = this.nextLessons.today.filter(lesson => lesson.id !== $event);
+    }
+  }
 }

@@ -6,6 +6,6 @@ export interface GeneralInformation {
   favoriteVehicle: string;
   favoriteVehicleTimeSpent: number;
   lastLesson: Lesson;
-  nextLesson: Lesson;
+  nextLesson: Lesson | null;
   timeSpentThisWeek: number;
 }

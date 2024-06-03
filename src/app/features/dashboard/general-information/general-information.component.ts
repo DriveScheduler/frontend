@@ -36,4 +36,10 @@ export class GeneralInformationComponent implements OnInit, OnDestroy {
       this.generationInformationSubscription.unsubscribe();
     }
   }
+
+  onLessonRemoved($event: number) {
+    if (this.generalInformation.nextLesson) {
+      this.generalInformation.nextLesson = null;
+    }
+  }
 }
