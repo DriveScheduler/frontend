@@ -5,7 +5,7 @@ import {environment} from "src/environments/environment";
 import {BehaviorSubject, Observable} from "rxjs";
 import {tap} from "rxjs/operators";
 import {User} from "src/app/shared/models/user";
-import {Lesson} from "src/app/shared/models/lesson";
+import {Lesson} from "src/app/shared/models/dashboard/lesson";
 import {GeneralInformation} from "src/app/shared/models/dashboard/generalIformation";
 
 @Injectable({

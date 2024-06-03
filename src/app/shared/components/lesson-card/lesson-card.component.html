@@ -1,10 +1,10 @@
 <div class="min-w-md p-4 bg-white shadow-md rounded-lg relative">
   <div class="flex justify-between items-start">
     <div>
-      <p class="text-lg font-semibold">{{ lesson.title }}</p>
-      <p class="mt-1 text-gray-500">De : {{ lesson.startTime }} à {{ lesson.endTime}}</p>
+      <p class="text-lg font-semibold">{{ lesson.date }} - {{ lesson.title }}</p>
+      <p class="mt-1 text-gray-500">De : {{ lesson.time }}</p>
     </div>
-    <span class="text-green-500 font-semibold"> {{ lesson.state.value }}</span>
+    <span class="text-green-500 font-semibold"> {{ lesson.status }}</span>
   </div>
   <div class="mt-2">
     <p><span class="font-semibold">Durée :</span> {{ lesson.duration }}</p>

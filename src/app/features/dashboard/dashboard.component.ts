@@ -10,7 +10,7 @@ import {
 import {NextLessonsComponent} from "src/app/features/dashboard/next-lessons/next-lessons.component";
 import {PastLessonsComponent} from "src/app/features/dashboard/past-lessons/past-lessons.component";
 import {GeneralInformation} from "src/app/shared/models/dashboard/generalIformation";
-import {Lesson} from "src/app/shared/models/lesson";
+import {Lesson} from "src/app/shared/models/dashboard/lesson";
 
 @Component({
   selector: 'app-dashboard',

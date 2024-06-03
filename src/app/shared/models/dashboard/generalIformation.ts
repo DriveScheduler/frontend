@@ -1,4 +1,4 @@
-import {Lesson} from "src/app/shared/models/lesson";
+import {Lesson} from "src/app/shared/models/dashboard/lesson";
 
 export interface GeneralInformation {
   favoriteTeacher: string;

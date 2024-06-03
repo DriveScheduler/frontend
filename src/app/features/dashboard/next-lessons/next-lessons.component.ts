@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {LessonCardComponent} from "src/app/shared/components/lesson-card/lesson-card.component";
 import {Observable} from "rxjs";
-import {Lesson} from "src/app/shared/models/lesson";
+import {Lesson} from "src/app/shared/models/dashboard/lesson";
 
 @Component({
   selector: 'app-next-lessons',
