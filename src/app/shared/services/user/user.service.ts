@@ -7,6 +7,8 @@ import {tap} from "rxjs/operators";
 import {User} from "src/app/shared/models/user";
 import {Lesson} from "src/app/shared/models/dashboard/lesson";
 import {GeneralInformation} from "src/app/shared/models/dashboard/generalIformation";
+import {NextLessons} from "src/app/shared/models/dashboard/nextLessons";
+import {PastLessons} from "src/app/shared/models/dashboard/pastLessons";
 
 @Injectable({
   providedIn: 'root'
@@ -40,15 +42,15 @@ export class UserService {
   }
 
   getUserDashboard() : Observable<GeneralInformation> {
-    return this.http.get<any>(`${environment.api}/User/Dashboard`);
+    return this.http.get<GeneralInformation>(`${environment.api}/User/Dashboard`);
   }
 
-  getUserNextLessons() : Observable<Lesson[]> {
-    return this.http.get<Lesson[]>(`${environment.api}/User/Planning`);
+  getUserNextLessons() : Observable<NextLessons> {
+    return this.http.get<NextLessons>(`${environment.api}/User/Planning`);
   }
 
-  getUserPastLessons() : Observable<Lesson[]> {
-    return this.http.get<Lesson[]>(`${environment.api}/User/History`);
+  getUserPastLessons() : Observable<PastLessons> {
+    return this.http.get<PastLessons>(`${environment.api}/User/History`);
   }
 
   updateUser(user: Partial<User>): Observable<any> {

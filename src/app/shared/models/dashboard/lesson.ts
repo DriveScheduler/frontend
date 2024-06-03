@@ -4,7 +4,6 @@ export interface Lesson {
   endTime: string;
   id: number;
   startTime: string;
-  status: string;
   teacher: string;
   time: string;
   title: string;

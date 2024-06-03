@@ -1,7 +1,7 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {LessonCardComponent} from "src/app/shared/components/lesson-card/lesson-card.component";
-import {Observable} from "rxjs";
-import {Lesson} from "src/app/shared/models/dashboard/lesson";
+import {Observable, Subscription} from "rxjs";
+import {NextLessons} from "src/app/shared/models/dashboard/nextLessons";
 
 @Component({
   selector: 'app-next-lessons',
@@ -12,8 +12,22 @@ import {Lesson} from "src/app/shared/models/dashboard/lesson";
   templateUrl: './next-lessons.component.html',
   styleUrl: './next-lessons.component.css'
 })
-export class NextLessonsComponent {
+export class NextLessonsComponent implements OnInit, OnDestroy{
 
-  @Input() nextLessons$!: Observable<Lesson[]>;
+  @Input() nextLessons$!: Observable<NextLessons | null>;
 
+  nextLessons: NextLessons | null = null;
+  nextLessonsSubscription!: Subscription;
+
+  ngOnInit() {
+    this.nextLessonsSubscription = this.nextLessons$.subscribe(data => {
+      this.nextLessons = data;
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.nextLessonsSubscription) {
+      this.nextLessonsSubscription.unsubscribe();
+    }
+  }
 }

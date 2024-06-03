@@ -10,7 +10,8 @@ import {
 import {NextLessonsComponent} from "src/app/features/dashboard/next-lessons/next-lessons.component";
 import {PastLessonsComponent} from "src/app/features/dashboard/past-lessons/past-lessons.component";
 import {GeneralInformation} from "src/app/shared/models/dashboard/generalIformation";
-import {Lesson} from "src/app/shared/models/dashboard/lesson";
+import {NextLessons} from "src/app/shared/models/dashboard/nextLessons";
+import {PastLessons} from "src/app/shared/models/dashboard/pastLessons";
 
 @Component({
   selector: 'app-dashboard',
@@ -25,8 +26,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   activeIndex: number = 0;
 
   generalInformation$! : Observable<GeneralInformation>;
-  nextLessons$!: Observable<Lesson[]>;
-  pastLessons$!: Observable<Lesson[]>;
+  nextLessons$!: Observable<NextLessons>;
+  pastLessons$!: Observable<PastLessons>;
 
   constructor(private userService: UserService) { }
 

@@ -1,26 +1,42 @@
-<div class="flex flex-col gap-6">
+<article class="flex flex-col gap-4">
   <div class="flex flex-col gap-2">
     <h1 class="text-2xl">Demain</h1>
-    <div class="flex flex-wrap gap-5">
-      <!-- boucle sur les cours de demain -->
+    <div class="flex flex-wrap gap-4">
+      @if (nextLessons?.tomorrow) {
+        @for (lesson of nextLessons?.tomorrow; track lesson.id) {
+          <app-lesson-card [lesson]="lesson"></app-lesson-card>
+        }
+      }
     </div>
   </div>
   <div class="flex flex-col gap-2">
     <h1 class="text-2xl">Cette semaine</h1>
-    <div class="flex flex-wrap gap-5">
-      <!-- boucle sur les cours de cette semaine -->
+    <div class="flex flex-wrap gap-4">
+      @if (nextLessons?.thisWeek) {
+        @for (lesson of nextLessons?.thisWeek; track lesson.id) {
+          <app-lesson-card [lesson]="lesson"></app-lesson-card>
+        }
+      }
     </div>
   </div>
   <div class="flex flex-col gap-2">
     <h1 class="text-2xl">Ce mois-ci</h1>
-    <div class="flex flex-wrap gap-5">
-      <!-- boucle sur les cours de ce mois -->
+    <div class="flex flex-wrap gap-4">
+      @if (nextLessons?.thisMonth) {
+        @for (lesson of nextLessons?.thisMonth; track lesson.id) {
+          <app-lesson-card [lesson]="lesson"></app-lesson-card>
+        }
+      }
     </div>
   </div>
   <div class="flex flex-col gap-2">
     <h1 class="text-2xl">Prochain mois</h1>
-    <div class="flex flex-wrap gap-5">
-      <!-- boucle sur les cours du prochain mois -->
+    <div class="flex flex-wrap gap-4">
+      @if (nextLessons?.nextMonths) {
+        @for (lesson of nextLessons?.nextMonths; track lesson.id) {
+          <app-lesson-card [lesson]="lesson"></app-lesson-card>
+        }
+      }
     </div>
   </div>
-</div>
+</article>
