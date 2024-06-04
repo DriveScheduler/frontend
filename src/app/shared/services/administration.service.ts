@@ -12,7 +12,7 @@ export class AdministrationService {
 
   constructor(private http: HttpClient) { }
 
-  createVehicle(vehicle: Partial<Vehicle>) {
+  createVehicle(vehicle: any) {
     return this.http.post(`${environment.api}/Admin/CreateVehicle`, vehicle);
   }
 
@@ -26,5 +26,13 @@ export class AdministrationService {
 
   getUsers() : Observable<User[]> {
     return this.http.get<User[]>(`${environment.api}/Admin/Users`);
+  }
+
+  deleteVehicle(vehicleId: number) {
+    return this.http.delete(`${environment.api}/Admin/Vehicle/${vehicleId}`);
+  }
+
+  deleteUser(userId: string) {
+    return this.http.delete(`${environment.api}/Admin/User/${userId}`);
   }
 }
