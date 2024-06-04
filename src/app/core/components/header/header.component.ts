@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { RouterLink } from "@angular/router";
+import {RouterLink, RouterLinkActive} from "@angular/router";
 import { AuthenticationService } from "src/app/shared/services/authentication/authentication.service";
 import { Subscription } from "rxjs";
 import { UserService } from "src/app/shared/services/user/user.service";
@@ -8,7 +8,8 @@ import { UserService } from "src/app/shared/services/user/user.service";
   selector: 'app-header',
   standalone: true,
   imports: [
-    RouterLink
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
@@ -16,6 +17,7 @@ import { UserService } from "src/app/shared/services/user/user.service";
 export class HeaderComponent implements OnInit, OnDestroy {
   isUserLoggedIn: boolean = false;
   userFirstName!: string;
+  userType!: number;
   private authSubscription!: Subscription;
   private userSubscription!: Subscription;
 
@@ -30,6 +32,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.userSubscription = this.userService.user$.subscribe(user => {
           if (user) {
             this.userFirstName = user.firstName;
+            this.userType = user.userType.value;
           }
         });
       }

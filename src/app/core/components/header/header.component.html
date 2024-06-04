@@ -9,18 +9,18 @@
     </a>
     <section>
       <div class="flex items-center md:gap-10 gap-4">
-        <div class="block hover:text-primary-purple hover:underline-offset-[15px] hover:underline relative">
+        <div class="block hover:text-primary-purple hover:underline-offset-[15px] hover:underline relative" routerLinkActive="active-link">
           <a routerLink="/calendar">
             <span>Planning</span>
           </a>
         </div>
-        <div class="block hover:text-primary-purple hover:underline-offset-[15px] hover:underline relative">
+        <div class="block hover:text-primary-purple hover:underline-offset-[15px] hover:underline relative" routerLinkActive="active-link">
           <a routerLink="/dashboard">
             <span>Suivi</span>
           </a>
         </div>
         @if (isUserLoggedIn) {
-          <div class="block hover:text-primary-purple hover:underline-offset-[15px] hover:underline relative">
+          <div class="block hover:text-primary-purple hover:underline-offset-[15px] hover:underline relative" routerLinkActive="active-link">
             <a routerLink="/account">
               <span>{{ userFirstName }}</span>
             </a>
@@ -32,6 +32,13 @@
               <button class="button__light__purple">
                 Connexion
               </button>
+            </a>
+          </div>
+        }
+        @if (isUserLoggedIn && this.userType == 2) {
+          <div class="block hover:text-primary-purple hover:underline-offset-[15px] hover:underline relative" routerLinkActive="active-link">
+            <a routerLink="/administration">
+              <span>Administration</span>
             </a>
           </div>
         }

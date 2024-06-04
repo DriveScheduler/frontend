@@ -2,10 +2,10 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {GeneralInformation} from "src/app/shared/models/dashboard/generalIformation";
 import {Observable, Subscription} from "rxjs";
 import {AsyncPipe} from "@angular/common";
-import {LessonCardComponent} from "src/app/shared/components/lesson-card/lesson-card.component";
-import {TeacherCardComponent} from "src/app/shared/components/teacher-card/teacher-card.component";
-import { NumberCardVehicleComponent } from "src/app/shared/components/numbers-card/number-card-vehicle/number-card-vehicle.component";
-import { NumberCardHoursComponent } from "src/app/shared/components/numbers-card/number-card-hours/number-card-hours.component";
+import {LessonCardComponent} from "src/app/features/dashboard/components/lesson-card/lesson-card.component";
+import {FavoriteTeacherCardComponent} from "src/app/features/dashboard/components/favorite-teacher-card/favorite-teacher-card.component";
+import { NumberCardVehicleComponent } from "src/app/features/dashboard/components/number-card-vehicle/number-card-vehicle.component";
+import { NumberCardHoursComponent } from "src/app/features/dashboard/components/number-card-hours/number-card-hours.component";
 
 @Component({
   selector: 'app-general-information',
@@ -13,7 +13,7 @@ import { NumberCardHoursComponent } from "src/app/shared/components/numbers-card
   imports: [
     AsyncPipe,
     LessonCardComponent,
-    TeacherCardComponent,
+    FavoriteTeacherCardComponent,
     NumberCardVehicleComponent,
     NumberCardHoursComponent
   ],
@@ -30,7 +30,6 @@ export class GeneralInformationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.generationInformationSubscription = this.generalInformation$.subscribe(data => {
       this.generalInformation = data;
-      console.log(this.generalInformation)
     });
   }
 

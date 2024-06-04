@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {LessonCardComponent} from "src/app/shared/components/lesson-card/lesson-card.component";
+import {LessonCardComponent} from "src/app/features/dashboard/components/lesson-card/lesson-card.component";
 import {Observable, Subscription} from "rxjs";
 import {NextLessons} from "src/app/shared/models/dashboard/nextLessons";
 

@@ -1,5 +1,15 @@
 <article class="flex flex-col gap-4">
   <div class="flex flex-col gap-2">
+    <h1 class="text-2xl">Aujourd'hui</h1>
+    <div class="flex flex-wrap gap-4">
+      @if (nextLessons?.today) {
+        @for (lesson of nextLessons?.today; track lesson.id) {
+          <app-lesson-card [lesson]="lesson" (lessonRemoved)="onLessonRemoved($event)"></app-lesson-card>
+        }
+      }
+    </div>
+  </div>
+  <div class="flex flex-col gap-2">
     <h1 class="text-2xl">Demain</h1>
     <div class="flex flex-wrap gap-4">
       @if (nextLessons?.tomorrow) {

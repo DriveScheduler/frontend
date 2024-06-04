@@ -14,7 +14,7 @@
   <div class="flex flex-col gap-2">
     <h1 class="text-2xl">Mon moniteur préféré</h1>
     @if (generalInformation && generalInformation.favoriteTeacher) {
-      <app-teacher-card [favoriteTeacher]="generalInformation.favoriteTeacher" [favoriteTeacherTimeSpent]="generalInformation.favoriteTeacherTimeSpent"></app-teacher-card>
+      <app-favorite-teacher-card [favoriteTeacher]="generalInformation.favoriteTeacher" [favoriteTeacherTimeSpent]="generalInformation.favoriteTeacherTimeSpent"></app-favorite-teacher-card>
     }
   </div>
   <div class="flex flex-col gap-2">

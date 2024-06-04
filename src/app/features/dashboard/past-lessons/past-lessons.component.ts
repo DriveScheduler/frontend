@@ -1,7 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subscription} from "rxjs";
 import {PastLessons} from "src/app/shared/models/dashboard/pastLessons";
-import {LessonCardComponent} from "src/app/shared/components/lesson-card/lesson-card.component";
+import {LessonCardComponent} from "src/app/features/dashboard/components/lesson-card/lesson-card.component";
 
 @Component({
   selector: 'app-past-lessons',

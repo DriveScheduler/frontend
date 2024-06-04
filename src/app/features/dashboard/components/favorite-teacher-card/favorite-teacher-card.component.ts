@@ -2,13 +2,13 @@ import {Component, Input} from '@angular/core';
 import {User} from "src/app/shared/models/user";
 
 @Component({
-  selector: 'app-teacher-card',
+  selector: 'app-favorite-teacher-card',
   standalone: true,
   imports: [],
-  templateUrl: './teacher-card.component.html',
-  styleUrl: './teacher-card.component.css'
+  templateUrl: './favorite-teacher-card.component.html',
+  styleUrl: './favorite-teacher-card.component.css'
 })
-export class TeacherCardComponent {
+export class FavoriteTeacherCardComponent {
 
   @Input() favoriteTeacherTimeSpent!: number;
   @Input() favoriteTeacher!: User;

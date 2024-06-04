@@ -3,7 +3,7 @@ import {UserService} from "src/app/shared/services/user/user.service";
 import {Observable, Subscription} from "rxjs";
 import {User} from "src/app/shared/models/user";
 import {CommonModule} from "@angular/common";
-import {LessonCardComponent} from "src/app/shared/components/lesson-card/lesson-card.component";
+import {LessonCardComponent} from "src/app/features/dashboard/components/lesson-card/lesson-card.component";
 import {
   GeneralInformationComponent
 } from "src/app/features/dashboard/general-information/general-information.component";
