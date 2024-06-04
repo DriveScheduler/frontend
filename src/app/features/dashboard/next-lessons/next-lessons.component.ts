@@ -2,6 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {LessonCardComponent} from "src/app/features/dashboard/components/lesson-card/lesson-card.component";
 import {Observable, Subscription} from "rxjs";
 import {NextLessons} from "src/app/shared/models/dashboard/nextLessons";
+import {User} from "src/app/shared/models/user";
 
 @Component({
   selector: 'app-next-lessons',
@@ -15,6 +16,7 @@ import {NextLessons} from "src/app/shared/models/dashboard/nextLessons";
 export class NextLessonsComponent implements OnInit, OnDestroy{
 
   @Input() nextLessons$!: Observable<NextLessons | null>;
+  @Input() user! : User;
 
   nextLessons: NextLessons | null = null;
   nextLessonsSubscription!: Subscription;

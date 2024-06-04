@@ -1,3 +1,5 @@
+import {User} from "src/app/shared/models/user";
+
 export interface Lesson {
   date: string;
   duration: string;
@@ -5,6 +7,7 @@ export interface Lesson {
   id: number;
   startTime: string;
   teacher: string;
+  student: User  | null;
   time: string;
   title: string;
   vehicle: string;

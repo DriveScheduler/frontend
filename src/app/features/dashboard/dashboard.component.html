@@ -36,10 +36,10 @@
       <div class="px-4 py-4 mb-8">
         <ng-container [ngSwitch]="activeIndex">
           <div *ngSwitchCase="0">
-            <app-general-information [generalInformation$]="generalInformation$"></app-general-information>
+            <app-general-information [generalInformation$]="generalInformation$" [user]="user"></app-general-information>
           </div>
           <div *ngSwitchCase="1">
-            <app-next-lessons [nextLessons$]="nextLessons$"></app-next-lessons>
+            <app-next-lessons [nextLessons$]="nextLessons$" [user]="user"></app-next-lessons>
           </div>
           <div *ngSwitchCase="2">
             <app-past-lessons [pastLessons$]="pastLessons$"></app-past-lessons>

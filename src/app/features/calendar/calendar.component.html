@@ -1,10 +1,10 @@
-<section class="overflow-hidden pt-[11rem] section-p-nb">
+<section class="overflow-hidden pt-[11rem] section-p-m">
   <h1 class="mb-2 font-bold text-xl">Mon planning</h1>
   <div class="grid grid-cols-5 xl:gap-2 gap-4">
     <div class="col-span-1">
       <app-calendar-filters (filterChange)="onFilterChange($event)"></app-calendar-filters>
     </div>
-    <ejs-schedule class="col-span-4 rounded-xl border border-primary-purple" #scheduleObj cssClass='quick-info-template' height='660px' [selectedDate]="selectedDate$" [eventSettings]="eventSettings" (actionComplete)="onActionComplete($event)" (created)="onCreate()" (cellClick)="onCellClick($event)" (eventClick)="onEventClick($event)" (popupOpen)="onPopupOpen($event)" (eventRendered)="applyCategoryColor($event)">  
+    <ejs-schedule class="col-span-4 rounded-xl border border-primary-purple" #scheduleObj cssClass='quick-info-template' height='660px' [selectedDate]="selectedDate$" [eventSettings]="eventSettings" (actionComplete)="onActionComplete($event)" (created)="onCreate()" (cellClick)="onCellClick($event)" (eventClick)="onEventClick($event)" (popupOpen)="onPopupOpen($event)" (eventRendered)="applyCategoryColor($event)">
       <!-- <e-views>
         <e-view option="Day"></e-view>
         <e-view option="Week"></e-view>
@@ -19,7 +19,7 @@
                 <img src="assets/images/key-solid.svg" alt="test" class="event-icon w-5 h-5 object-contain" />
               </div>
             <div class="description">{{data.Description}}</div>
-              <div class="footer" [style.background]="data.PrimaryColor"></div> 
+              <div class="footer" [style.background]="data.PrimaryColor"></div>
             </div>
           </ng-template>
         </e-view>
