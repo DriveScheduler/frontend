@@ -49,7 +49,7 @@
 }
 
 .button__light__purple {
-  @apply daisy-btn bg-secondary-purple hover:shadow-lg hover:opacity-90 text-[16px] hover:bg-primary-purple rounded-[15px] text-white font-light px-6
+  @apply daisy-btn bg-secondary-purple hover:shadow-lg hover:opacity-90 text-[16px] hover:bg-primary-purple rounded-[15px] text-white font-light px-6;
 }
 
 .button__primary__purple {
