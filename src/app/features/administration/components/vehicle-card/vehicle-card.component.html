@@ -1,11 +1,11 @@
 <div class="min-w-[250px] p-4 gap-2 shadow-md rounded-lg relative flex flex-col items-center h-full justify-center">
   <div class="flex flex-col items-center">
     <img src="/assets/images/car-solid-black.svg" class="scale-75">
-    <p class="font-semibold">Peugeot 3078</p>
+    <p class="font-semibold"> {{ vehicle.name }}</p>
   </div>
   <div class="flex flex-col items-center">
-    <p>B - Voiture</p>
-    <p>DJ232JK</p>
+    <p> {{ vehicle.type.label }}</p>
+    <p> {{ vehicle.registrationNumber }}</p>
   </div>
   <div class="flex gap-2">
     <button (click)="updateVehicle()">

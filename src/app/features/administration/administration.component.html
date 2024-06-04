@@ -3,11 +3,9 @@
     <div class="flex flex-col gap-4">
       <h1 class="text-2xl">Parcs véhicules</h1>
       <div class="flex flex-wrap gap-4">
-        <!-- j'vais faire une loop ici en mode meow -->
-        <app-vehicle-card></app-vehicle-card>
-        <app-vehicle-card></app-vehicle-card>
-        <app-vehicle-card></app-vehicle-card>
-        <app-vehicle-card></app-vehicle-card>
+        @for (vehicle of (this.vehicles$ | async); track vehicle.id) {
+          <app-vehicle-card [vehicle]="vehicle" (vehicleDeleted)="onVehicleDeleted($event)"></app-vehicle-card>
+        }
         <button>
           <div class="min-w-[250px] p-4 hover:shadow-md hover:translate-x-[2px] hover:translate-y-[-2px] hover:shadow-secondary-purple shadow-md rounded-lg relative flex flex-col items-center h-full justify-center gap-4">
             <img src="/assets/images/plus.svg" class="scale-90">
@@ -19,19 +17,18 @@
     <div class="flex flex-col gap-4">
       <h1 class="text-2xl">Élèves</h1>
       <div class="flex flex-wrap gap-4">
-        <!-- j'vais faire une loop ici en mode meow -->
-        <app-user-card></app-user-card>
-        <app-user-card></app-user-card>
-        <app-user-card></app-user-card>
+        @for (student of (this.students$ | async); track student.id) {
+          <app-user-card [user]="student" (userDeleted)="onUserDeleted($event)"></app-user-card>
+        }
       </div>
     </div>
     <div class="flex flex-col gap-4">
       <h1 class="text-2xl">Moniteurs</h1>
       <div class="flex flex-wrap gap-4">
-        <!-- j'vais faire une loop ici en mode meow -->
-        <app-user-card></app-user-card>
-        <app-user-card></app-user-card>
-        <app-user-card></app-user-card>
+        @for (teacher of (this.teachers$ | async); track teacher.id) {
+          <app-user-card [user]="teacher" (userDeleted)="onUserDeleted($event)"></app-user-card>
+        }
       </div>
-    </div>  </div>
+    </div>
+  </div>
 </section>

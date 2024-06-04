@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Vehicle} from "src/app/shared/models/Vehicle";
 
 @Component({
   selector: 'app-vehicle-card',
@@ -8,6 +9,10 @@ import { Component } from '@angular/core';
   styleUrl: './vehicle-card.component.css'
 })
 export class VehicleCardComponent {
+
+  @Input() vehicle!: Vehicle;
+  @Output() vehicleDeleted: EventEmitter<number> = new EventEmitter<number>();
+
 
   deleteVehicle() {
 
