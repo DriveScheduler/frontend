@@ -17,7 +17,7 @@ import {filter} from "rxjs";
 })
 export class AppComponent implements OnInit {
   showFooter: boolean = true;
-  private noFooterRoutes: string[] = ['/calendar'];
+  private noFooterRoutes: string[] = ['/'];
 
   constructor(private router: Router) {}
 

@@ -1,46 +1,43 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { SignupFormComponent } from './signup-form.component';
-import { LicenceService} from "src/app/shared/services/licence/licence.service";
-import { Licence} from "src/app/shared/models/licence";
+import { LicenceService } from 'src/app/shared/services/licence/licence.service';
+import { Licence } from 'src/app/shared/models/licence';
 import { RouterTestingModule } from '@angular/router/testing';
-import {of} from "rxjs";
+import { of } from 'rxjs';
 
 describe('SignupFormComponent', () => {
   let component: SignupFormComponent;
   let fixture: ComponentFixture<SignupFormComponent>;
   let licenceService: LicenceService;
-  let httpTestingController: HttpTestingController;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        SignupFormComponent,
+      ],
       providers: [LicenceService]
-    })
-      .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SignupFormComponent);
     component = fixture.componentInstance;
     licenceService = TestBed.inject(LicenceService);
-    httpTestingController = TestBed.inject(HttpTestingController);
   });
 
-  afterEach(() => {
-    httpTestingController.verify();
-  });
-
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 
   it('should fetch licence types from backend', () => {
     const mockLicences: Licence[] = [
-      { id: 0, label: 'B - Voiture' },
-      { id: 1, label: 'C - Poids lourd' },
-      { id: 2, label: 'A2 - Moto' },
-      { id: 3, label: 'D - Bus' }
+      { value: 0, label: 'B - Voiture' },
+      { value: 1, label: 'C - Poids lourd' },
+      { value: 2, label: 'A2 - Moto' },
+      { value: 3, label: 'D - Bus' }
     ];
 
     spyOn(licenceService, 'getLicences').and.returnValue(of(mockLicences));

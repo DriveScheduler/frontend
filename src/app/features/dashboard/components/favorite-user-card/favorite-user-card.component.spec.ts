@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FavoriteTeacherCardComponent } from './favorite-teacher-card.component';
+import { FavoriteTeacherCardComponent } from './favorite-user-card.component';
 
 describe('TeacherCardComponent', () => {
   let component: FavoriteTeacherCardComponent;

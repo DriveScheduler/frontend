@@ -4,7 +4,7 @@
     <div class="flex flex-wrap gap-4">
       @if (nextLessons?.today) {
         @for (lesson of nextLessons?.today; track lesson.id) {
-          <app-lesson-card [lesson]="lesson" (lessonRemoved)="onLessonRemoved($event)"></app-lesson-card>
+          <app-lesson-card [lesson]="lesson" (lessonRemoved)="onLessonRemoved($event)" [user]="user"></app-lesson-card>
         }
       }
     </div>
@@ -14,7 +14,7 @@
     <div class="flex flex-wrap gap-4">
       @if (nextLessons?.tomorrow) {
         @for (lesson of nextLessons?.tomorrow; track lesson.id) {
-          <app-lesson-card [lesson]="lesson" (lessonRemoved)="onLessonRemoved($event)"></app-lesson-card>
+          <app-lesson-card [lesson]="lesson" (lessonRemoved)="onLessonRemoved($event)" [user]="user"></app-lesson-card>
         }
       }
     </div>
@@ -24,7 +24,7 @@
     <div class="flex flex-wrap gap-4">
       @if (nextLessons?.thisWeek) {
         @for (lesson of nextLessons?.thisWeek; track lesson.id) {
-          <app-lesson-card [lesson]="lesson" (lessonRemoved)="onLessonRemoved($event)"></app-lesson-card>
+          <app-lesson-card [lesson]="lesson" (lessonRemoved)="onLessonRemoved($event)" [user]="user"></app-lesson-card>
         }
       }
     </div>
@@ -34,7 +34,7 @@
     <div class="flex flex-wrap gap-4">
       @if (nextLessons?.thisMonth) {
         @for (lesson of nextLessons?.thisMonth; track lesson.id) {
-          <app-lesson-card [lesson]="lesson" (lessonRemoved)="onLessonRemoved($event)"></app-lesson-card>
+          <app-lesson-card [lesson]="lesson" (lessonRemoved)="onLessonRemoved($event)" [user]="user"></app-lesson-card>
         }
       }
     </div>
@@ -44,7 +44,7 @@
     <div class="flex flex-wrap gap-4">
       @if (nextLessons?.nextMonths) {
         @for (lesson of nextLessons?.nextMonths; track lesson.id) {
-          <app-lesson-card [lesson]="lesson" (lessonRemoved)="onLessonRemoved($event)"></app-lesson-card>
+          <app-lesson-card [lesson]="lesson" (lessonRemoved)="onLessonRemoved($event)" [user]="user"></app-lesson-card>
         }
       }
     </div>

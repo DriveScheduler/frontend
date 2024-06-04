@@ -2,7 +2,7 @@
   <div class="flex flex-col gap-2">
     <h1 class="text-2xl">Ma prochaine leçon</h1>
     @if (generalInformation && generalInformation.nextLesson) {
-      <app-lesson-card [lesson]="generalInformation.nextLesson" (lessonRemoved)="onLessonRemoved($event)"></app-lesson-card>
+      <app-lesson-card [lesson]="generalInformation.nextLesson" (lessonRemoved)="onLessonRemoved($event)" [user]="user" [past]="true"></app-lesson-card>
     }
   </div>
   <div class="flex flex-col gap-2">
@@ -12,16 +12,16 @@
     }
   </div>
   <div class="flex flex-col gap-2">
-    <h1 class="text-2xl">Mon moniteur préféré</h1>
-    @if (generalInformation && generalInformation.favoriteTeacher) {
-      <app-favorite-teacher-card [favoriteTeacher]="generalInformation.favoriteTeacher" [favoriteTeacherTimeSpent]="generalInformation.favoriteTeacherTimeSpent"></app-favorite-teacher-card>
+    <h1 class="text-2xl">Mon humain préféré</h1>
+    @if (generalInformation && generalInformation.favoriteUser) {
+      <app-favorite-user-card [favoriteUser]="generalInformation.favoriteUser" [favoriteUserTimeSpent]="generalInformation.favoriteUserTimeSpent"></app-favorite-user-card>
     }
   </div>
   <div class="flex flex-col gap-2">
     <h1 class="text-2xl">Mes chiffres</h1>
     <div class="flex xl:flex-row flex-col gap-4">
       @if (generalInformation && generalInformation.favoriteVehicle && generalInformation.favoriteVehicleTimeSpent) {
-        <app-number-card-vehicle class="flex-grow" [favoriteVehicle]="generalInformation.favoriteVehicle" [favoriteVehicleTimeSpent]="generalInformation.favoriteTeacherTimeSpent"></app-number-card-vehicle>
+        <app-number-card-vehicle class="flex-grow" [favoriteVehicle]="generalInformation.favoriteVehicle" [favoriteVehicleTimeSpent]="generalInformation.favoriteUserTimeSpent"></app-number-card-vehicle>
       }
       @if (generalInformation && generalInformation.timeSpentThisWeek) {
         <app-number-card-hours class="flex-grow" [timeSpentThisWeek]="generalInformation.timeSpentThisWeek"></app-number-card-hours>

@@ -9,8 +9,6 @@ import {User} from "src/app/shared/models/user";
 import {AsyncPipe} from "@angular/common";
 import {CustomInputComponent} from "src/app/shared/components/custom-input/custom-input.component";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {CustomSnackbarService} from "src/app/shared/components/custom-snackbar/custom-snackbar.service";
-import {FormUtilsService} from "src/app/shared/services/form_utils/form-utils.service";
 import {Licence} from "src/app/shared/models/licence";
 import {LicenceService} from "src/app/shared/services/licence/licence.service";
 import { CommonModule } from "@angular/common";
@@ -39,7 +37,7 @@ export class AdministrationComponent implements OnInit {
 
   vehicleTypes$! : Observable<Licence[]>
 
-  constructor (private licenceService : LicenceService, private administrationService: AdministrationService, private customSnackbar: CustomSnackbarService, private formUtilsService : FormUtilsService) {}
+  constructor (private licenceService : LicenceService, private administrationService: AdministrationService) {}
 
   vehicleCreationForm = new FormGroup({
     name: new FormControl('', Validators.required),
