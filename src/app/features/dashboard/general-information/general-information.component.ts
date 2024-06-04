@@ -4,7 +4,8 @@ import {Observable, Subscription} from "rxjs";
 import {AsyncPipe} from "@angular/common";
 import {LessonCardComponent} from "src/app/shared/components/lesson-card/lesson-card.component";
 import {TeacherCardComponent} from "src/app/shared/components/teacher-card/teacher-card.component";
-import {NumbersCardComponent} from "src/app/shared/components/numbers-card/numbers-card.component";
+import { NumberCardVehicleComponent } from "src/app/shared/components/numbers-card/number-card-vehicle/number-card-vehicle.component";
+import { NumberCardHoursComponent } from "src/app/shared/components/numbers-card/number-card-hours/number-card-hours.component";
 
 @Component({
   selector: 'app-general-information',
@@ -13,7 +14,8 @@ import {NumbersCardComponent} from "src/app/shared/components/numbers-card/numbe
     AsyncPipe,
     LessonCardComponent,
     TeacherCardComponent,
-    NumbersCardComponent
+    NumberCardVehicleComponent,
+    NumberCardHoursComponent
   ],
   templateUrl: './general-information.component.html',
   styleUrl: './general-information.component.css'
@@ -28,6 +30,7 @@ export class GeneralInformationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.generationInformationSubscription = this.generalInformation$.subscribe(data => {
       this.generalInformation = data;
+      console.log(this.generalInformation)
     });
   }
 

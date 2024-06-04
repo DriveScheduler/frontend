@@ -19,7 +19,14 @@
   </div>
   <div class="flex flex-col gap-2">
     <h1 class="text-2xl">Mes chiffres</h1>
-    <app-numbers-card></app-numbers-card>
+    <div class="flex xl:flex-row flex-col gap-4">
+      @if (generalInformation && generalInformation.favoriteVehicle && generalInformation.favoriteVehicleTimeSpent) {
+        <app-number-card-vehicle class="flex-grow" [favoriteVehicle]="generalInformation.favoriteVehicle" [favoriteVehicleTimeSpent]="generalInformation.favoriteTeacherTimeSpent"></app-number-card-vehicle>
+      }
+      @if (generalInformation && generalInformation.timeSpentThisWeek) {
+        <app-number-card-hours class="flex-grow" [timeSpentThisWeek]="generalInformation.timeSpentThisWeek"></app-number-card-hours>
+      }
+    </div>
   </div>
 </article>
 
