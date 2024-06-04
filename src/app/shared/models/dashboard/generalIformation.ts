@@ -1,6 +1,6 @@
 import {Lesson} from "src/app/shared/models/dashboard/lesson";
 import {User} from "src/app/shared/models/user";
-import {Vehicle} from "src/app/shared/models/Vehicle";
+import {Vehicle} from "src/app/shared/models/vehicle";
 
 export interface GeneralInformation {
   favoriteTeacher: User;

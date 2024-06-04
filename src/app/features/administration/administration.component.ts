@@ -4,7 +4,7 @@ import {VehicleCardComponent} from "src/app/features/administration/components/v
 import {UserCardComponent} from "src/app/features/administration/components/user-card/user-card.component";
 import {AdministrationService} from "src/app/shared/services/administration.service";
 import {map, Observable} from "rxjs";
-import {Vehicle} from "src/app/shared/models/Vehicle";
+import {Vehicle} from "src/app/shared/models/vehicle";
 import {User} from "src/app/shared/models/user";
 import {AsyncPipe} from "@angular/common";
 import {CustomInputComponent} from "src/app/shared/components/custom-input/custom-input.component";
@@ -14,6 +14,7 @@ import {FormUtilsService} from "src/app/shared/services/form_utils/form-utils.se
 import {Licence} from "src/app/shared/models/licence";
 import {LicenceService} from "src/app/shared/services/licence/licence.service";
 import { CommonModule } from "@angular/common";
+import {VehicleCreationModalComponent} from "src/app/features/administration/components/vehicle-creation-modal/vehicle-creation-modal.component";
 
 @Component({
   selector: 'app-administration',
@@ -25,7 +26,8 @@ import { CommonModule } from "@angular/common";
     UserCardComponent,
     AsyncPipe,
     CustomInputComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    VehicleCreationModalComponent
   ],
   templateUrl: './administration.component.html',
   styleUrl: './administration.component.css'
@@ -77,6 +79,14 @@ export class AdministrationComponent implements OnInit {
     );
   }
 
+  onVehicleCreated() {
+    this.getVehicles();
+  }
+
+  onVehicleUpdated() {
+    this.getVehicles();
+  }
+
   onUserDeleted($event: string) {
     this.students$ = this.students$.pipe(
       map(users => users.filter(user => user.id !== $event))
@@ -86,29 +96,5 @@ export class AdministrationComponent implements OnInit {
     );
   }
 
-  addVehicle() {
-    if (this.vehicleCreationForm.invalid) {
-      this.formUtilsService.markFormGroupDirty(this.vehicleCreationForm);
-      this.customSnackbar.show('Veuillez renseigner tous les champs correctement.', 'error');
-      return;
-    }
 
-    const name = this.vehicleCreationForm.value.name as string;
-    const registrationNumber = this.vehicleCreationForm.value.registrationNumber as string;
-    const type = parseInt(this.vehicleCreationForm.value.type as string, 10);
-
-    const vehicleData = {
-      name,
-      registrationNumber,
-      type
-    };
-
-    this.administrationService.createVehicle(vehicleData).subscribe(
-      () => {
-        this.customSnackbar.show('Véhicule créé !', 'success');
-        this.getVehicles();
-      },
-      error => this.customSnackbar.show(error.error, 'error')
-    );
-  }
 }

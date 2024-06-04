@@ -8,9 +8,14 @@
     <p> {{ vehicle.registrationNumber }}</p>
   </div>
   <div class="flex gap-2">
-    <button (click)="updateVehicle()">
+    <button (click)="vehicleUpdate.showModal()">
       <img src="/assets/images/pencil-solid.svg" class="scale-75">
     </button>
+    <dialog #vehicleUpdate id="vehicleUpdate" class="daisy-modal">
+      <div class="daisy-modal-box">
+        <app-vehicle-update-modal [vehicle]="vehicle" (vehicleUpdated)="onVehicleUpdated()"></app-vehicle-update-modal>
+      </div>
+    </dialog>
     <button (click)="deleteVehicle()">
       <img src="/assets/images/trash-solid%201.svg" class="scale-75">
     </button>

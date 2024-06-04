@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Vehicle} from "src/app/shared/models/Vehicle";
+import {Vehicle} from "src/app/shared/models/vehicle";
 
 @Component({
   selector: 'app-number-card-vehicle',
