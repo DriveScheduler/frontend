@@ -9,4 +9,11 @@ import { Component } from '@angular/core';
 })
 export class VehicleCardComponent {
 
+  deleteVehicle() {
+
+  }
+
+  updateVehicle() {
+
+  }
 }

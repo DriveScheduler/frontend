@@ -1,1 +1,15 @@
-<p>user-card works!</p>
+<div class="min-w-[250px] p-4 gap-2 shadow-md rounded-lg relative flex flex-col items-center h-full justify-center">
+  <div class="flex flex-col items-center">
+    <img src="/assets/images/user-solid-black.svg" class="scale-90">
+    <p class="font-semibold">Stéphane JEANGERARD</p>
+  </div>
+  <div class="flex flex-col items-center">
+    <p>A2 - Moto</p>
+    <p>Eleve / moniteur</p>
+  </div>
+  <div class="flex gap-2">
+    <button (click)="deleteUser()">
+      <img src="/assets/images/trash-solid%201.svg" class="scale-75">
+    </button>
+  </div>
+</div>

@@ -1,7 +1,37 @@
-<section class="overflow-hidden pt-[11rem] section-p-nb min-h-screen">
-  <div class="flex flex-col gap-32">
-    <h1 class="text-2xl">Parcs véhicules</h1>
-    <h1 class="text-2xl">Élèves</h1>
-    <h1 class="text-2xl">Moniteurs</h1>
-  </div>
+<section class="overflow-hidden pt-[11rem] section-p-m min-h-screen">
+  <div class="flex flex-col gap-8">
+    <div class="flex flex-col gap-4">
+      <h1 class="text-2xl">Parcs véhicules</h1>
+      <div class="flex flex-wrap gap-4">
+        <!-- j'vais faire une loop ici en mode meow -->
+        <app-vehicle-card></app-vehicle-card>
+        <app-vehicle-card></app-vehicle-card>
+        <app-vehicle-card></app-vehicle-card>
+        <app-vehicle-card></app-vehicle-card>
+        <button>
+          <div class="min-w-[250px] p-4 hover:shadow-md hover:translate-x-[2px] hover:translate-y-[-2px] hover:shadow-secondary-purple shadow-md rounded-lg relative flex flex-col items-center h-full justify-center gap-4">
+            <img src="/assets/images/plus.svg" class="scale-90">
+            <div>Ajouter véhicule</div>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="flex flex-col gap-4">
+      <h1 class="text-2xl">Élèves</h1>
+      <div class="flex flex-wrap gap-4">
+        <!-- j'vais faire une loop ici en mode meow -->
+        <app-user-card></app-user-card>
+        <app-user-card></app-user-card>
+        <app-user-card></app-user-card>
+      </div>
+    </div>
+    <div class="flex flex-col gap-4">
+      <h1 class="text-2xl">Moniteurs</h1>
+      <div class="flex flex-wrap gap-4">
+        <!-- j'vais faire une loop ici en mode meow -->
+        <app-user-card></app-user-card>
+        <app-user-card></app-user-card>
+        <app-user-card></app-user-card>
+      </div>
+    </div>  </div>
 </section>
