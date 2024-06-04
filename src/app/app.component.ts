@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import { CalendarComponent } from './features/calendar/calendar.component';
 import {HeaderComponent} from "./core/components/header/header.component";
 import {FooterComponent} from "./core/components/footer/footer.component";
-import {NavigationEnd, Router, RouterOutlet} from "@angular/router";
-import {filter} from "rxjs";
+import {RouterOutlet} from "@angular/router";
+
 
 
 @Component({
@@ -15,18 +15,7 @@ import {filter} from "rxjs";
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
-  showFooter: boolean = true;
-  private noFooterRoutes: string[] = ['/'];
+export class AppComponent {
 
-  constructor(private router: Router) {}
-
-  ngOnInit(): void {
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: any) => {
-      this.showFooter = !this.noFooterRoutes.includes(event.url);
-    });
-  }
 }
 

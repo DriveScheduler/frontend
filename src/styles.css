@@ -28,10 +28,6 @@
   @apply xl:px-14 xl:pb-20 md:px-12 md:pb-12 px-4 pb-4;
 }
 
-.section-p-nb {
-  @apply xl:px-14 md:px-12 px-4;
-}
-
 .padding {
   @apply sm:px-16 px-8 sm:py-24 py-12;
 }
